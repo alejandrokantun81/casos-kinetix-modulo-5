@@ -194,6 +194,15 @@
                 </sc-for>
               </div>
             </sc-if>
+            <sc-if value="{{ b.isAction }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px 24px;border-radius:20px;background:var(--gray-100);border:1px solid var(--border-subtle)">
+                <div style="display:flex;flex-direction:column;gap:4px;min-width:220px;flex:1">
+                  <span style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-700)">{{ b.kicker }}</span>
+                  <span style="font-size:16px;line-height:1.5;color:var(--raisin-black)">{{ b.x }}</span>
+                </div>
+                <a href="{{ b.href }}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;border-radius:999px;background:var(--orange);border:2px solid var(--orange);color:#fff;font-size:16px;font-weight:700;text-decoration:none;white-space:nowrap" style-hover="background:var(--orange-700);border-color:var(--orange-700);text-decoration:none">{{ b.label }}</a>
+              </div>
+            </sc-if>
           </div>
         </sc-for>
 
@@ -499,6 +508,7 @@ class Component extends DCLogic {
       pages['c' + c.n + '-actividad'] = { ...base, showCanvasBar: true, blocks: [
         CO('obj', 'Objetivo de aprendizaje', c.obj),
         c.ia ? CO('ia', 'Uso de IA', c.final ? 'Esta actividad incorpora IA Integrada (Generativa + Analítica + Diseño) como herramienta central. Es el entregable final del Módulo 5.' : c.n === 3 ? 'Esta actividad incorpora el uso de herramientas de IA Generativa como parte central del proceso.' : 'Esta actividad incorpora el uso de herramientas de IA Analítica y de Visualización de Datos.') : CO('noia', 'Sin IA', 'Esta actividad se realiza completamente SIN el uso de herramientas de Inteligencia Artificial.'),
+        ...(c.n === 3 ? [{ t: 'action', kicker: 'Herramienta interactiva', x: 'Construye y prueba tus árboles de decisión conversacionales para los escenarios de Fair Play Digital.', label: 'Árbol de Decisión App', href: 'https://alejandrokantun81.github.io/fair-play-digital-arbol-decision/' }] : []),
         H(c.final ? 'Estructura del documento ejecutivo' : 'Lo que debes hacer'),
         ...(c.todoIntro ? [Pp(c.todoIntro)] : []),
         { t: 'ol', items: c.todo }
@@ -557,7 +567,7 @@ class Component extends DCLogic {
     const mapCells = r => ({ cells: r.map((v, i) => ({ v, fw: i === 0 ? 700 : 500 })) });
 
     const blocks = pg.blocks.map(b => {
-      const o = { ...b, isH: b.t === 'h', isH4: b.t === 'h4', isP: b.t === 'p', isList: b.t === 'ul' || b.t === 'ol', isTable: b.t === 'table', isFacts: b.t === 'facts', isCallout: b.t === 'callout', isCanvas: b.t === 'canvas', isCheck: b.t === 'check', isCards: b.t === 'cards' };
+      const o = { ...b, isH: b.t === 'h', isH4: b.t === 'h4', isP: b.t === 'p', isList: b.t === 'ul' || b.t === 'ol', isTable: b.t === 'table', isFacts: b.t === 'facts', isCallout: b.t === 'callout', isCanvas: b.t === 'canvas', isCheck: b.t === 'check', isCards: b.t === 'cards', isAction: b.t === 'action' };
       if (o.isList) { o.mkBg = b.t === 'ol' ? 'var(--orange-100)' : 'transparent'; o.items = b.items.map((it, i) => ({ v: it.v, mk: b.t === 'ol' ? String(i + 1) : '•', subs: (it.subs || []).map(v => ({ v })) })); if (b.t === 'ul') o.mkBg = 'transparent'; }
       if (o.isTable) { o.head = b.head.map(v => ({ v })); o.rows = b.rows.map(mapCells); o.cols = b.head.length === 2 ? 'minmax(160px,1fr) 2fr' : b.head.length === 3 ? '1.3fr .7fr 1.6fr' : b.head.length === 4 ? '1.2fr 1fr 1fr 1fr' : 'repeat(' + b.head.length + ',minmax(0,1fr))'; if (b.head[0] === '#') o.cols = '48px 1.3fr 2.4fr 80px'; if (b.head[0] === 'Criterio') o.cols = '1.6fr .6fr 1.4fr'; if (b.head[0] === 'Segmento') o.cols = b.head.length === 5 ? '1.1fr .6fr .5fr 1.8fr 1fr' : '1.1fr .6fr .5fr 2fr'; if (b.head[0] === 'Actividad') o.cols = '1fr 2.2fr 1fr .8fr'; o.minW = b.minW || '560px'; if (b.head.length === 5 && b.head[0] === '#') o.cols = '40px 1.1fr 2fr 1fr 1fr'; }
       if (o.isFacts) o.rows = b.rows.map((r, i) => ({ k: r[0], v: r[1], bt: i ? '1px solid var(--border-subtle)' : '0' }));
