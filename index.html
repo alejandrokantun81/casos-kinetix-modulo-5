@@ -506,9 +506,9 @@ class Component extends DCLogic {
       const base = { eyebrow: eb, tag: c.tag, tagIa: c.ia, title: c.title, sub: c.sub, caseN: c.n };
       pages['c' + c.n + '-narrativa'] = { ...base, blocks: c.narr };
       pages['c' + c.n + '-actividad'] = { ...base, showCanvasBar: true, blocks: [
+        ...(c.n === 3 ? [{ t: 'action', kicker: 'Herramienta interactiva', x: 'Construye y prueba tus árboles de decisión conversacionales para los escenarios de Fair Play Digital.', label: 'App Arbol Decision', href: 'https://alejandrokantun81.github.io/fair-play-digital-arbol-decision/' }] : []),
         CO('obj', 'Objetivo de aprendizaje', c.obj),
         c.ia ? CO('ia', 'Uso de IA', c.final ? 'Esta actividad incorpora IA Integrada (Generativa + Analítica + Diseño) como herramienta central. Es el entregable final del Módulo 5.' : c.n === 3 ? 'Esta actividad incorpora el uso de herramientas de IA Generativa como parte central del proceso.' : 'Esta actividad incorpora el uso de herramientas de IA Analítica y de Visualización de Datos.') : CO('noia', 'Sin IA', 'Esta actividad se realiza completamente SIN el uso de herramientas de Inteligencia Artificial.'),
-        ...(c.n === 3 ? [{ t: 'action', kicker: 'Herramienta interactiva', x: 'Construye y prueba tus árboles de decisión conversacionales para los escenarios de Fair Play Digital.', label: 'Árbol de Decisión App', href: 'https://alejandrokantun81.github.io/fair-play-digital-arbol-decision/' }] : []),
         H(c.final ? 'Estructura del documento ejecutivo' : 'Lo que debes hacer'),
         ...(c.todoIntro ? [Pp(c.todoIntro)] : []),
         { t: 'ol', items: c.todo }
