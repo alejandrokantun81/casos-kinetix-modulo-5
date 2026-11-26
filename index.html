@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Módulo 5 · Casos Kinetix</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/tokens/colors.css">
+<link rel="stylesheet" href="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/tokens/typography.css">
+<link rel="stylesheet" href="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/tokens/base.css">
+<link rel="stylesheet" href="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/styles.css">
+<script src="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/_ds_bundle.js"></script>
+<style>html{scroll-behavior:smooth}body{background:#fff}</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;font-family:var(--font-sans);color:var(--text-body)">
+  <header style="position:sticky;top:0;z-index:30;height:64px;background:#fff;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 24px">
+    <div style="display:flex;align-items:center;gap:14px;min-width:0">
+      <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMenu }}" aria-label="Menú" style="width:44px;height:44px;border-radius:12px;border:1px solid var(--border-strong);background:#fff;font-size:20px;font-weight:800;cursor:pointer">☰</button>
+      </sc-if>
+      <a href="#home" style="display:flex;flex-direction:column;line-height:1.15;text-decoration:none;min-width:0">
+        <span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)">Universidad Anáhuac Mayab</span>
+        <span style="font-size:16px;font-weight:800;color:var(--rich-black);letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Módulo 5 · Casos Kinetix</span>
+      </a>
+    </div>
+    <x-import component-from-global-scope="AnHuacMayabEducarParaTransformar_44f5d9.Button" href="#canvas" size="sm" hint-size="auto,40px">Entregas en Canvas</x-import>
+  </header>
+
+  <div style="display:flex;flex:1;align-items:flex-start">
+    <aside style="position:{{ sbPos }};top:{{ sbTop }};left:0;bottom:0;z-index:20;display:{{ sbDisplay }};flex-direction:column;gap:4px;width:300px;flex:none;height:{{ sbHeight }};overflow-y:auto;background:var(--gray-100);padding:24px 16px 48px;box-shadow:{{ sbShadow }}">
+      <sc-for list="{{ nav }}" as="e" hint-placeholder-count="8">
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <sc-if value="{{ e.isLabel }}" hint-placeholder-val="{{ false }}">
+            <div style="margin:20px 12px 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-600)">{{ e.label }}</div>
+          </sc-if>
+          <sc-if value="{{ e.isLink }}" hint-placeholder-val="{{ true }}">
+            <a href="{{ e.href }}" style="display:block;padding:10px 12px;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none;background:{{ e.bg }};color:{{ e.fg }}" style-hover="background:var(--gray-200)">{{ e.label }}</a>
+          </sc-if>
+          <sc-if value="{{ e.isCase }}" hint-placeholder-val="{{ false }}">
+            <a href="{{ e.href }}" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;text-decoration:none;background:{{ e.bg }};color:{{ e.fg }}" style-hover="background:var(--gray-200)">
+              <span style="flex:none;width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;background:{{ e.chipBg }};color:{{ e.chipFg }}">{{ e.n }}</span>
+              <span style="display:flex;flex-direction:column;line-height:1.25;min-width:0">
+                <span style="font-size:15px;font-weight:700">{{ e.title }}</span>
+                <span style="font-size:12px;font-weight:600;color:var(--gray-600)">{{ e.tag }}</span>
+              </span>
+            </a>
+            <sc-if value="{{ e.open }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:2px;margin:2px 0 8px 27px;padding-left:14px;border-left:2px solid var(--orange)">
+                <sc-for list="{{ e.subs }}" as="s" hint-placeholder-count="3">
+                  <a href="{{ s.href }}" style="display:block;padding:8px 12px;border-radius:10px;font-size:14px;font-weight:{{ s.fw }};text-decoration:none;background:{{ s.bg }};color:{{ s.fg }}" style-hover="background:var(--gray-200)">{{ s.label }}</a>
+                </sc-for>
+              </div>
+            </sc-if>
+          </sc-if>
+        </div>
+      </sc-for>
+    </aside>
+
+    <main style="flex:1;min-width:0;display:flex;flex-direction:column">
+      <section style="background:var(--rich-black);color:#fff;padding:{{ heroPad }}">
+        <div style="max-width:880px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)">{{ page.eyebrow }}</span>
+            <sc-if value="{{ page.hasTag }}" hint-placeholder-val="{{ false }}">
+              <span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:999px;background:{{ page.tagBg }};color:{{ page.tagFg }}">{{ page.tag }}</span>
+            </sc-if>
+          </div>
+          <h1 style="color:#fff;font-size:{{ h1Size }};font-weight:800;line-height:1.08">{{ page.title }}</h1>
+          <sc-if value="{{ page.hasSub }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:18px;line-height:1.55;color:#E6E6E6;max-width:68ch">{{ page.sub }}</p>
+          </sc-if>
+          <sc-if value="{{ page.hasTabs }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+              <sc-for list="{{ page.tabs }}" as="t" hint-placeholder-count="3">
+                <a href="{{ t.href }}" style="padding:10px 20px;border-radius:999px;font-size:15px;font-weight:700;text-decoration:none;border:2px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }}" style-hover="border-color:var(--orange)">{{ t.label }}</a>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </section>
+
+      <section style="padding:{{ bodyPad }};display:flex;flex-direction:column;gap:18px;max-width:960px;width:100%">
+        <sc-if value="{{ page.showCanvasBar }}" hint-placeholder-val="{{ false }}">
+          <a href="{{ page.canvasHref }}" style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-radius:20px;background:var(--orange-100);color:var(--rich-black);text-decoration:none;font-size:15px;font-weight:600;line-height:1.45" style-hover="background:var(--orange-100);text-decoration:underline">
+            <span style="flex:none;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:999px;background:var(--orange);color:var(--rich-black)">Canvas</span>
+            <span>Tus respuestas de esta actividad se suben a Canvas. Ver cómo entregar.</span>
+          </a>
+        </sc-if>
+
+        <sc-for list="{{ blocks }}" as="b" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <sc-if value="{{ b.isH }}" hint-placeholder-val="{{ false }}">
+              <h2 style="font-size:28px;margin-top:22px;padding-top:22px;border-top:1px solid var(--border-subtle)">{{ b.x }}</h2>
+            </sc-if>
+            <sc-if value="{{ b.isH4 }}" hint-placeholder-val="{{ false }}">
+              <h4 style="font-size:19px;margin-top:8px">{{ b.x }}</h4>
+            </sc-if>
+            <sc-if value="{{ b.isP }}" hint-placeholder-val="{{ true }}">
+              <p style="font-size:17px;line-height:1.7;max-width:72ch;color:var(--raisin-black)">{{ b.x }}</p>
+            </sc-if>
+            <sc-if value="{{ b.isList }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:10px;max-width:72ch">
+                <sc-for list="{{ b.items }}" as="it" hint-placeholder-count="3">
+                  <div style="display:flex;gap:14px;align-items:flex-start">
+                    <span style="flex:none;min-width:28px;height:28px;margin-top:1px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;background:{{ b.mkBg }};color:var(--rich-black)">{{ it.mk }}</span>
+                    <div style="display:flex;flex-direction:column;gap:8px;font-size:17px;line-height:1.65;color:var(--raisin-black)">
+                      <span>{{ it.v }}</span>
+                      <sc-for list="{{ it.subs }}" as="s" hint-placeholder-count="0">
+                        <span style="display:flex;gap:10px;font-size:16px;line-height:1.55;color:var(--gray-600)"><span style="flex:none;color:var(--orange);font-weight:800">–</span><span>{{ s.v }}</span></span>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ b.isTable }}" hint-placeholder-val="{{ false }}">
+              <div style="border:1px solid var(--border-subtle);border-radius:20px;overflow-x:auto;background:#fff">
+                <div style="min-width:{{ b.minW }}">
+                  <div style="display:grid;grid-template-columns:{{ b.cols }};background:var(--gray-100)">
+                    <sc-for list="{{ b.head }}" as="c" hint-placeholder-count="3">
+                      <div style="padding:12px 16px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-600)">{{ c.v }}</div>
+                    </sc-for>
+                  </div>
+                  <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="3">
+                    <div style="display:grid;grid-template-columns:{{ b.cols }};border-top:1px solid var(--border-subtle)">
+                      <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="3">
+                        <div style="padding:12px 16px;font-size:15px;line-height:1.5;color:var(--raisin-black);font-weight:{{ c.fw }}">{{ c.v }}</div>
+                      </sc-for>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ b.isFacts }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;border:1px solid var(--border-subtle);border-radius:20px;overflow:hidden">
+                <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="3">
+                  <div style="display:grid;grid-template-columns:minmax(110px,190px) 1fr;gap:16px;padding:14px 20px;border-top:{{ r.bt }}">
+                    <span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--orange-700);padding-top:3px">{{ r.k }}</span>
+                    <span style="font-size:16px;line-height:1.55;color:var(--raisin-black)">{{ r.v }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ b.isCallout }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:20px 24px;border-radius:20px;background:{{ b.bg }};color:{{ b.fg }};display:flex;flex-direction:column;gap:6px">
+                <span style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:{{ b.kfg }}">{{ b.title }}</span>
+                <span style="font-size:17px;line-height:1.6">{{ b.x }}</span>
+              </div>
+            </sc-if>
+            <sc-if value="{{ b.isCanvas }}" hint-placeholder-val="{{ false }}">
+              <div style="background:var(--rich-black);color:#fff;border-radius:28px;padding:32px;display:flex;flex-direction:column;gap:22px">
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <span style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)">Entrega en Canvas</span>
+                  <h3 style="color:#fff;font-size:26px">{{ b.title }}</h3>
+                  <p style="font-size:17px;line-height:1.6;color:#E6E6E6">{{ b.x }}</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:10px">
+                  <span style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#CFCFCF">Qué debes subir</span>
+                  <sc-for list="{{ b.items }}" as="it" hint-placeholder-count="4">
+                    <div style="display:flex;gap:12px;font-size:16px;line-height:1.55"><span style="flex:none;color:var(--orange);font-weight:800">✓</span><span>{{ it.v }}</span></div>
+                  </sc-for>
+                </div>
+                <div style="padding-top:18px;border-top:1px solid #3a3a3a;font-size:15px;line-height:1.6;color:#E6E6E6">{{ b.note }}</div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ b.isCheck }}" hint-placeholder-val="{{ false }}">
+              <div style="border:1px solid var(--border-subtle);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:6px">
+                <span style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-700);margin-bottom:6px">Antes de enviar a Canvas</span>
+                <sc-for list="{{ b.items }}" as="it" hint-placeholder-count="4">
+                  <button onClick="{{ it.toggle }}" style="display:flex;gap:14px;align-items:flex-start;text-align:left;padding:10px 8px;border:0;border-radius:12px;background:transparent;cursor:pointer;font-family:inherit;font-size:16px;line-height:1.5;color:var(--raisin-black)" style-hover="background:var(--gray-100)">
+                    <span style="flex:none;width:24px;height:24px;margin-top:1px;border-radius:7px;border:2px solid var(--orange);background:{{ it.bg }};color:var(--rich-black);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800">{{ it.mark }}</span>
+                    <span>{{ it.v }}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ b.isCards }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px;margin-top:6px">
+                <sc-for list="{{ b.items }}" as="c" hint-placeholder-count="5">
+                  <a href="{{ c.href }}" style="display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:20px;background:{{ c.bg }};color:{{ c.fg }};text-decoration:none;box-shadow:var(--shadow-sm)" style-hover="box-shadow:var(--shadow-md);text-decoration:none">
+                    <div style="display:flex;justify-content:space-between;align-items:center">
+                      <span style="font-size:36px;font-weight:800;letter-spacing:-.02em;color:{{ c.nfg }}">{{ c.n }}</span>
+                      <span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:{{ c.tagBg }};color:{{ c.tagFg }}">{{ c.tag }}</span>
+                    </div>
+                    <span style="font-size:20px;font-weight:800;line-height:1.2;letter-spacing:-.02em">{{ c.title }}</span>
+                    <span style="font-size:14px;line-height:1.5;color:{{ c.sfg }}">{{ c.sub }}</span>
+                    <span style="font-size:14px;font-weight:700;color:{{ c.nfg }}">Abrir caso →</span>
+                  </a>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+
+        <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px;padding-top:28px;border-top:1px solid var(--border-subtle)">
+          <sc-if value="{{ hasPrev }}" hint-placeholder-val="{{ false }}">
+            <a href="{{ prev.href }}" style="display:flex;flex-direction:column;gap:2px;padding:14px 22px;border-radius:20px;background:var(--gray-100);text-decoration:none;max-width:46%" style-hover="background:var(--gray-200);text-decoration:none">
+              <span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-600)">← Anterior</span>
+              <span style="font-size:15px;font-weight:700;color:var(--rich-black)">{{ prev.label }}</span>
+            </a>
+          </sc-if>
+          <sc-if value="{{ hasNext }}" hint-placeholder-val="{{ false }}">
+            <a href="{{ next.href }}" style="display:flex;flex-direction:column;gap:2px;padding:14px 22px;border-radius:20px;background:var(--orange-100);text-decoration:none;text-align:right;margin-left:auto;max-width:46%" style-hover="text-decoration:none;background:#FFD9C4">
+              <span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--orange-700)">Siguiente →</span>
+              <span style="font-size:15px;font-weight:700;color:var(--rich-black)">{{ next.label }}</span>
+            </a>
+          </sc-if>
+        </div>
+      </section>
+
+      <footer style="margin-top:auto;background:var(--raisin-black);color:#CFCFCF;padding:28px 40px;font-size:14px;line-height:1.6">
+        Universidad Anáhuac Mayab · Módulo 5: Comunicación y Gestión de la Información con IA · Certificación en Desarrollo de Competencias Gerenciales. Caso completamente ficticio con fines didácticos.
+      </footer>
+    </main>
+  </div>
+  <sc-if value="{{ overlay }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ toggleMenu }}" style="position:fixed;inset:64px 0 0 0;z-index:10;background:rgba(4,4,4,.45)"></div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { route: 'home', narrow: false, menu: false, checks: {} };
+
+  componentDidMount() {
+    this._onHash = () => { this.setState({ route: (location.hash || '#home').slice(1) || 'home', menu: false }); window.scrollTo(0, 0); };
+    this._onResize = () => this.setState({ narrow: window.innerWidth < 960 });
+    window.addEventListener('hashchange', this._onHash);
+    window.addEventListener('resize', this._onResize);
+    let checks = {};
+    try { checks = JSON.parse(localStorage.getItem('kx5-checks') || '{}'); } catch (e) {}
+    this.setState({ route: (location.hash || '#home').slice(1) || 'home', narrow: window.innerWidth < 960, checks });
+  }
+  componentWillUnmount() { window.removeEventListener('hashchange', this._onHash); window.removeEventListener('resize', this._onResize); }
+
+  data() {
+    if (this._d) return this._d;
+    const H = x => ({ t: 'h', x }), H4 = x => ({ t: 'h4', x }), Pp = x => ({ t: 'p', x });
+    const UL = items => ({ t: 'ul', items }), OL = items => ({ t: 'ol', items });
+    const TB = (head, rows, minW) => ({ t: 'table', head, rows, minW });
+    const FA = rows => ({ t: 'facts', rows });
+    const CO = (tone, title, x) => ({ t: 'callout', tone, title, x });
+    const CHK = key => ({ t: 'check', key });
+    const CV = (title, x, items, note) => ({ t: 'canvas', title, x, items, note });
+    const CRIT = (rows) => TB(['Criterio', 'Ponderación', 'Indicadores de logro'], rows, '560px');
+
+    const cases = [
+      { n: 1, title: 'La Telaraña Invisible', short: 'Radiografía de canales', tag: 'Sin IA', ia: false, tema: 'Tema 5.1',
+        sub: 'Radiografía de Canales — Mapeo Manual de Flujos de Comunicación',
+        card: 'Compra urgente de AeroStrata sin comunicación interdepartamental.',
+        narr: [
+          FA([['Tema del temario', 'Tema 5.1 — Términos 1-10 (Comunicación estratégica, canales, direccionalidad, ruido, cuellos de botella)'], ['Uso de IA', 'Sin IA — Actividad de diagnóstico manual'], ['Modalidad', 'Grupal (equipos de 3-4 integrantes)'], ['Materiales', 'Papel rotafolio o pizarrón, marcadores de colores']]),
+          Pp('Diagnóstico de flujos de comunicación interdepartamental entre Compras, Operaciones Retail, CEDIS y Marketing.'),
+          H('1.1 Encuadre del Escenario'),
+          Pp('Es lunes 4 de noviembre de 2026. El Ing. Alejandro Torres Villanueva, CEO de Kinetix Performance Sports, acaba de recibir una llamada urgente de la Lic. Patricia Guerrero Salinas, Gerente de Compras Técnicas. La marca global proveedora del modelo AeroStrata Carbon Pro (SKU CAL-001, precio $6,499 MXN, margen 56.1%) ha anunciado un incremento de precio del 12% efectivo en 15 días. Patricia necesita autorización inmediata para emitir una orden de compra spot de $350,000 MXN —el máximo de su autonomía— para asegurar 120 pares al precio actual antes del aumento.'),
+          Pp('El problema no es la decisión financiera. El problema es que nadie más en la organización se ha enterado.'),
+          Pp('Kinetix Performance Sports opera con 80 colaboradores distribuidos en 9 sucursales a lo largo de 8 ciudades: CDMX (Flagship Masaryk + Concept Santa Fe), Monterrey (Flagship San Pedro), Guadalajara (Concept Andares), Puebla (Concept Angelópolis), Querétaro (Concept Antea), Mérida (Concept Altabrisa), León (Concept Plaza Mayor) y Lerma (Outlet Performance). Además, opera un canal de e-commerce propio y un canal B2B con 25 clubes atléticos aliados.'),
+          Pp('La estructura organizacional se divide en tres grandes gerencias bajo el CEO:'),
+          UL([{ v: 'Compras y Cadena de Suministro (Lic. Patricia Guerrero, 3 colaboradores)' }, { v: 'Operaciones Retail & CEDIS (Lic. Roberto Hernández Mora, 59 colaboradores: 9 Store Managers, 9 Líderes Técnicos y 36 Asesores Técnicos)' }, { v: 'Marketing, CX & Alianzas (Mtra. Diana Cruz Espinoza, 10 colaboradores)' }]),
+          H('1.2 El Incidente y la Evidencia'),
+          Pp('Patricia autoriza la compra spot el mismo lunes. Los 120 pares llegan al CEDIS el miércoles 6 de noviembre. Sin embargo, una cascada de fallas comunicacionales comienza a desarrollarse:'),
+          H4('Falla 1 — El CEDIS no estaba preparado.'),
+          Pp('El Ing. Raúl Domínguez Paredes, Gerente de Cadena de Suministro, no fue notificado del pedido urgente. Sus 2 Supervisores de Fulfillment (Jorge Espinoza y Paola Reyes) y 3 Analistas de Despachos no tenían espacio asignado en almacén para un lote no programado.'),
+          H4('Falla 2 — Los Store Managers no sabían del cambio de precio.'),
+          Pp('La Lic. Carmen Sánchez Nava, Store Manager del Flagship Masaryk —la sucursal #1 con $382,411 MXN en ventas— se enteró por un cliente que preguntó si el precio iba a subir. Tuvo que improvisar una respuesta.'),
+          H4('Falla 3 — El equipo B2B perdió una oportunidad crítica.'),
+          Pp('Eduardo Ramos, el Asesor Técnico B2B #1 ($168,400 en ventas, rating 4.7/5.0), tenía una reunión programada con el Club Atlético Coyotes para un pedido institucional de 30 pares de AeroStrata. Sin saber del aumento inminente, no pudo usar el argumento de "precio congelado" como incentivo de cierre. El ticket promedio B2B es de $19,209 MXN.'),
+          H4('Falla 4 — Marketing no pudo reaccionar.'),
+          Pp('La Mtra. Diana Cruz Espinoza (Gerente de Marketing, promedio 360° de 4.63) tenía planeada una campaña de contenido técnico sobre el AeroStrata para la semana siguiente. Sin saber del cambio de precio, la campaña se publicó con el precio anterior, generando confusión en redes sociales.'),
+          H4('Falla 5 — El equipo de CX recibió el impacto.'),
+          Pp('La Lic. Alejandra Ríos Mendoza, Coordinadora de Experiencia del Cliente, reportó 14 tickets de clientes preguntando por discrepancias de precio entre la web y la tienda física, violando el protocolo de Respeto de Precios y Homologación de Promociones, que establece que los precios de lista y descuentos son idénticos en la web y en tienda física.'),
+          H('1.3 Factores de Tensión y Restricciones'),
+          UL([{ v: 'La política de Click & Collect en 2 horas exige sincronización de stock en tiempo real entre CEDIS y las 9 sucursales. El lote de emergencia rompió esa sincronización.' }, { v: 'El Gerente Regional de Operaciones, Lic. Roberto Hernández Mora, supervisa a 59 colaboradores pero no tiene un canal formal de comunicación de emergencia con Compras.' }, { v: 'Los 4 Especialistas de Visual Merchandising (coordinados por Ing. Fernanda Villanueva Acosta) necesitaban actualizar los exhibidores del AeroStrata en las 9 tiendas, pero se enteraron 5 días después.' }, { v: 'La competencia COM (Comunicación) en la Encuesta 360° obtuvo un promedio organizacional de 3.99/5.0, apenas por debajo de la meta de 4.0, confirmando que la comunicación es un área de mejora real.' }]),
+          H('1.4 Resolución y Cierre'),
+          Pp('El CEO convoca una reunión de emergencia el viernes 8 de noviembre con las 3 gerencias. Reconoce que la decisión de Patricia fue correcta financieramente, pero que la ausencia de un protocolo de comunicación interdepartamental para decisiones urgentes generó una cascada de fallas que costó:'),
+          TB(['Consecuencia', 'Valor / Magnitud'], [['Oportunidad B2B perdida (30 pares Club Coyotes)', '$194,970 MXN estimados'], ['Tickets de queja en CX por discrepancia de precios', '14 tickets'], ['Días con exhibición desactualizada en 9 tiendas', '5 días'], ['Confusión en redes sociales por precio incorrecto', '1 campaña comprometida']], '480px'),
+          Pp('Torres Villanueva pide a cada gerencia que mapee sus canales de comunicación actuales y proponga un protocolo de comunicación de emergencia antes del próximo lunes.')
+        ],
+        obj: 'Identificar y mapear los canales de comunicación formales e informales de una organización multicanal, clasificando los flujos como descendentes, ascendentes y horizontales, y detectando cuellos de botella sin recurso tecnológico.',
+        todo: [
+          { v: 'Traza con tus materiales (estambre, tachuelas, cartón) el mapa completo de flujos de comunicación de Kinetix, incluyendo:', subs: ['Las 3 gerencias y sus departamentos', 'Las 9 sucursales con sus Store Managers y Líderes Técnicos', 'Los canales Digital y B2B', 'El CEDIS como nodo logístico'] },
+          { v: 'Clasifica cada flujo como descendente (↓), ascendente (↑) u horizontal (↔) usando flechas de colores diferentes.' },
+          { v: 'Identifica al menos 5 puntos de ruido donde la información se distorsionó o se perdió en el caso narrado. Para cada punto, explica:', subs: ['¿Quién debió comunicar qué a quién?', '¿Qué tipo de flujo faltó (descendente, ascendente u horizontal)?', '¿Cuál fue la consecuencia concreta?'] },
+          { v: 'Señala los 3 cuellos de botella más críticos de la estructura actual (por ejemplo: Roberto Hernández supervisando 59 personas, la ausencia de canal Compras→CEDIS, etc.).' },
+          { v: 'Propone un protocolo de comunicación de emergencia en formato manual (sin tecnología) que hubiera evitado la cascada de fallas descrita en el caso.' }
+        ],
+        crit: [['Completitud del mapa de flujos', '25%', 'Se incluyen todos los actores'], ['Correcta clasificación de flujos (descendente / ascendente / horizontal)', '25%', 'Flechas de colores diferentes por tipo de flujo'], ['Identificación de puntos de ruido con consecuencias concretas', '25%', 'Mínimo 5 puntos'], ['Protocolo de comunicación de emergencia viable', '25%', 'Aplicable y sin tecnología']],
+        align: 'Tema 5.1 — Términos 1-10: Comunicación estratégica, canal de comunicación, comunicación descendente, comunicación ascendente, comunicación horizontal, retroalimentación de doble vía, mensaje clave, ruido en la comunicación, comunicación efectiva, cuello de botella comunicacional.',
+        cv: ['Mapa de flujos de comunicación (fotografía o escaneo legible si lo dibujaste en rotafolio o pizarrón)', 'Mínimo 5 puntos de ruido, cada uno con quién, qué flujo faltó y consecuencia', 'Los 3 cuellos de botella más críticos', 'Protocolo de comunicación de emergencia en formato manual'],
+        chk: ['El mapa incluye las 3 gerencias, las 9 sucursales, los canales Digital y B2B, y el CEDIS', 'Cada flujo está marcado como descendente, ascendente u horizontal con flechas de colores', 'Hay al menos 5 puntos de ruido explicados', 'Señalé 3 cuellos de botella', 'El protocolo no depende de tecnología', 'Resolví el caso sin herramientas de IA', 'Las imágenes se leen bien y el documento incluye los nombres de todos los integrantes del equipo'],
+        mod: 'Trabajo grupal (equipos de 3-4 integrantes).' },
+      { n: 2, title: 'Código Rojo en Andares', short: 'Diagnóstico sin IA', tag: 'Sin IA', ia: false, tema: 'Tema 5.2',
+        sub: 'Diagnóstico de Fallas de Comunicación sin IA',
+        card: 'Sucursal con 82.6% de asistencia, 2 casos graves y conflictos de comisiones.',
+        narr: [
+          FA([['Tema del temario', 'Tema 5.2 — Términos 11-15 (Gestión de la información, flujo, información accionable, fuentes confiables, infoxicación)'], ['Uso de IA', 'Sin IA — Actividad de diagnóstico analítico'], ['Modalidad', 'Individual o por parejas'], ['Entregable', 'Diagnóstico ejecutivo escrito (máximo 1 página)']]),
+          Pp('Análisis ejecutivo de indicadores de asistencia, Evaluación 360° y registros del Movement Lab en Concept Andares GDL.'),
+          H('2.1 Encuadre del Escenario'),
+          Pp('Es viernes 1 de noviembre de 2026. La Lic. Lorena Figueras López, Store Manager de Concept Andares GDL, llega a su oficina a las 8:45 AM y encuentra sobre su escritorio un sobre cerrado de la Dirección de Capital Humano. Dentro hay un documento titulado "Alerta Crítica — Concept Andares GDL" con el sello de CONFIDENCIAL.'),
+          Pp('Concept Andares es una tienda en formato Mall Premium ubicada en el centro comercial más exclusivo de Guadalajara. Genera $184,320 MXN en ventas con 44 tickets y un ticket promedio de $4,189 MXN. Tiene 8 colaboradores asignados. Sin embargo, los números que Lorena lee en el documento la dejan helada.'),
+          H('2.2 El Incidente y la Evidencia'),
+          Pp('El reporte de asistencia de octubre 2026 revela que Concept Andares concentra la asistencia más baja de toda la organización: 82.6%, con 2 de los 4 casos graves de los 80 colaboradores de Kinetix. Los datos específicos son los siguientes:'),
+          H4('Caso Grave #1 — Alejandro Silva, Asesor Técnico'),
+          TB(['Indicador', 'Dato'], [['Asistencia efectiva', '63.6% (12 de 22 días hábiles)'], ['Retardos', '3 retardos (días 1, 3 y 20 de octubre)'], ['Faltas injustificadas', '2 faltas (días 14 y 28)'], ['Días de incapacidad médica', '5 días (del 6 al 12 de octubre)'], ['Total de incidencias', '10 incidencias'], ['Resultado Encuesta 360°', '3.36/5.0 — Clasificación: "Requiere Mejora"'], ['eNPS interno', '48 (el más bajo de la organización)'], ['Venta neta', '$112,500 MXN con conversión biomecánica de 72.2%'], ['Situación actual', 'Plan de Mejora Activo. Fricciones recurrentes por apropiación de comisiones.']], '520px'),
+          Pp('La incapacidad del 6 al 12 de octubre coincide con un conflicto documentado sobre una venta del AeroStrata Carbon Pro ($6,499 MXN) donde otro compañero cobró la venta que Alejandro había asesorado durante 35 minutos.'),
+          H4('Caso Grave #2 — Esteban Aguilar, Asesor Técnico'),
+          TB(['Indicador', 'Dato'], [['Asistencia efectiva', '59.1% (13 de 22 días hábiles)'], ['Retardos', '2 retardos (días 5 y 19, ambos lunes)'], ['Faltas injustificadas', '4 faltas (días 7, 14, 21 y 28 — todas en martes)'], ['Días de incapacidad', '3 días (del 13 al 15 de octubre)'], ['Total de incidencias', '9 incidencias'], ['Resultado Encuesta 360°', '3.33/5.0 — Clasificación: "Requiere Mejora"'], ['eNPS interno', '55'], ['Venta neta', '$38,200 MXN con conversión biomecánica de 77.8%'], ['Patrón de riesgo', '4 faltas exactamente en martes sugieren ausentismo intencional.']], '520px'),
+          Pp('Mientras tanto, en la misma sucursal, Paola Navarrete (Asesora Técnica, $71,820 en ventas, rating 4.5/5.0, clasificación "En Desarrollo") y Daniel Fuentes ($22,000 en ventas, rating 4.2/5.0) mantienen un desempeño aceptable pero reportan desmotivación creciente por la carga de trabajo adicional que absorben cuando sus compañeros faltan.'),
+          H('2.3 Comparativa con Flagship Masaryk CDMX'),
+          Pp('Para dimensionar la brecha, Lorena compara los indicadores de Andares con los del Flagship Masaryk CDMX (Store Manager: Carmen Sánchez Nava, promedio 360° de 4.53):'),
+          TB(['Indicador', 'Concept Andares GDL', 'Flagship Masaryk CDMX'], [['Asistencia efectiva', '82.6%', '98.5%'], ['Promedio Encuesta 360°', '3.72', '4.24'], ['Venta neta mensual', '$184,320 MXN', '$382,411 MXN'], ['Mejor asesor (ventas)', 'Paola Navarrete $71,820 / rating 4.5', 'Carlos Mendoza $195,400 / rating 4.8'], ['Conversión biomecánica top', '72.2% (caso grave)', '89.5% (Carlos Mendoza)']], '560px'),
+          H('2.4 Factores de Tensión y Restricciones'),
+          UL([{ v: 'Lorena Figueras tiene un promedio 360° de 4.19 (Competente), con competencia de Comunicación de 4.3 y Liderazgo de 4.2. ¿Son suficientes para manejar esta crisis?' }, { v: 'El protocolo de disputas de comisiones establece que "la comisión pertenece irrevocablemente al asesor que realizó y firmó digitalmente la prueba de Gait Analysis en la tablet del Movement Lab". Pero Alejandro Silva alega que el sistema no registró correctamente su firma.' }, { v: 'La tasa de faltas injustificadas de la organización es 3.4% (meta: <2%). Andares concentra una proporción desproporcionada.' }, { v: 'El hallazgo H4 del reporte confirma que los 4 casos graves coinciden con colaboradores clasificados como "Requiere Mejora" o "En Desarrollo" en la Encuesta 360°.' }]),
+          H('2.5 Resolución y Cierre'),
+          Pp('Capital Humano le da a Lorena 72 horas para entregar un diagnóstico ejecutivo de máximo 1 página que responda:'),
+          UL([{ v: '¿Es un problema de individuos o un problema sistémico de la sucursal?' }, { v: '¿Qué información es accionable y qué es ruido?' }, { v: '¿Qué fuentes de información son confiables para tomar decisiones?' }])
+        ],
+        obj: 'Diagnosticar fallas comunicacionales a partir de datos cuantitativos reales, distinguiendo entre información accionable y sobrecarga informativa (infoxicación), sin el uso de herramientas de IA.',
+        todo: [
+          { v: 'Analiza los datos cuantitativos del caso y clasifícalos en una tabla con dos columnas:', subs: ['Información Accionable (datos que permiten tomar una decisión concreta)', 'Ruido / Infoxicación (datos que distraen o no son relevantes para el diagnóstico)'] },
+          { v: 'Identifica las fuentes de información disponibles para Lorena y evalúa su confiabilidad:', subs: ['Reporte de asistencia biométrico', 'Encuesta 360° (autoevaluación + jefe + pares + subordinados)', 'Bitácora del Movement Lab (registros de Gait Analysis)', 'Reportes de venta por asesor', 'eNPS interno'] },
+          { v: 'Responde la pregunta central: ¿Es un problema de individuos o sistémico? Sustenta con al menos 3 evidencias cuantitativas del caso.' },
+          { v: 'Redacta el diagnóstico ejecutivo de máximo 1 página que Lorena debe entregar a Capital Humano. Debe incluir:', subs: ['Hallazgos principales (máximo 3)', 'Evidencia cuantitativa de respaldo', 'Recomendación de acción inmediata', 'Indicadores de seguimiento propuestos'] }
+        ],
+        crit: [['Calidad del análisis de datos cuantitativos', '25%', 'Precisión y profundidad'], ['Distinción entre información accionable y ruido (infoxicación)', '25%', 'Tabla completa y justificada'], ['Argumentación: problema individual vs. sistémico', '25%', '3 evidencias mínimo'], ['Claridad y estructura del diagnóstico ejecutivo escrito', '25%', '1 página, estilo ejecutivo']],
+        align: 'Tema 5.2 — Términos 11-15: Gestión de la información, flujo de información, información accionable, fuente de información confiable, sobrecarga de información (infoxicación).',
+        cv: ['Tabla de información accionable vs. ruido / infoxicación', 'Evaluación de confiabilidad de las 5 fuentes de información', 'Respuesta a la pregunta central (individual o sistémico) con al menos 3 evidencias cuantitativas', 'Diagnóstico ejecutivo de máximo 1 página para Capital Humano'],
+        chk: ['La tabla accionable vs. ruido está completa y justificada', 'Evalué la confiabilidad de las 5 fuentes', 'Sustenté la respuesta con al menos 3 evidencias cuantitativas', 'El diagnóstico tiene máximo 1 página', 'Incluye máximo 3 hallazgos, evidencia, acción inmediata e indicadores de seguimiento', 'Resolví el caso sin herramientas de IA'],
+        mod: 'Trabajo individual o por parejas.' },
+      { n: 3, title: 'Fair Play Digital', short: 'Chatbot de mediación', tag: 'IA Generativa', ia: true, tema: 'Temas 5.1 + 5.3',
+        sub: 'Diseño de un Chatbot de Mediación con IA',
+        card: 'Tres escenarios de conflicto recurrente: comisiones, garantías y turnos.',
+        narr: [
+          FA([['Tema del temario', 'Temas 5.1 + 5.3 — Términos 6, 7, 8, 18 (Retroalimentación de doble vía, mensaje clave, ruido, herramienta colaborativa)'], ['Uso de IA', 'Con IA — IA Generativa para diseño conversacional'], ['Modalidad', 'Grupal (equipos de 3-4 integrantes)'], ['Entregable', 'Árbol de decisión, system prompt y prototipo funcional']]),
+          Pp('Diseño conversacional con retroalimentación de doble vía en la aplicación interna Kinetix HR.'),
+          H('3.1 Encuadre del Escenario'),
+          Pp('Es miércoles 13 de noviembre de 2026. Tras el diagnóstico del Caso 2, la Dirección de Capital Humano de Kinetix ha decidido implementar un sistema de mediación digital que permita a los colaboradores reportar conflictos, solicitar mediaciones y recibir orientación sobre protocolos internos las 24 horas del día, los 7 días de la semana.'),
+          Pp('La Mtra. Diana Cruz Espinoza (Gerente de Marketing & Alianzas, promedio 360° de 4.63, la #4 de toda la organización) ha sido designada como líder del proyecto por su excepcional competencia en Comunicación (4.9/5.0, la más alta de la organización). Diana debe diseñar un chatbot interno que funcione dentro de la app Kinetix HR, alineado con los 4 valores corporativos fundamentales, especialmente:'),
+          UL([{ v: 'Valor #1: Integridad Técnica y Competitiva (Fair Play)' }, { v: 'Valor #4: Colaboración Interdisciplinaria y Empatía Operativa' }]),
+          H('3.2 Los Tres Escenarios de Conflicto Recurrente'),
+          H4('Escenario A — Reclamo por Apropiación de Comisión'),
+          Pp('Alejandro Silva (Concept Andares) está furioso. Invirtió 35 minutos con un cliente maratonista realizando el análisis biomecánico completo en el Movement Lab. El cliente decidió comprar el AeroStrata Carbon Pro ($6,499 MXN), pero cuando Alejandro estaba atendiendo a otro cliente, su compañero cobró la venta en el POS sin seleccionar el nombre de Alejandro como asesor original. La comisión de $97.48 MXN (1.5% de $6,499) fue asignada al compañero.'),
+          Pp('Alejandro amenaza con "dejar de hacer análisis biomecánicos si nadie respeta el protocolo."'),
+          Pp('Protocolo vigente: "La comisión individual pertenece irrevocablemente al asesor que realizó y firmó digitalmente la prueba de Gait Analysis en la tablet del Movement Lab. El Store Manager coteja la hora del reporte cinemático con la hora del ticket de venta."'),
+          H4('Escenario B — Reclamación Técnica por Garantía de 30 Días'),
+          Pp('Un corredor aficionado exigente utilizó 25 días las zapatillas Stratus Glide Max Cushion ($4,599 MXN, margen 57.6%) y acusa molestias lumbares y desgaste asimétrico. Exige devolución total de forma prepotente.'),
+          Pp('La política establece que si el calzado "genera sobrecargas, ampollas estructurales o incompatibilidad biomecánica, se realiza el cambio inmediato de modelo o la emisión de nota de crédito por el 100%". Sin embargo, el cliente no pasó por el Movement Lab originalmente, lo que genera un dilema procedimental para el asesor que atiende el reclamo.'),
+          H4('Escenario C — Resistencia al Cambio de Turno'),
+          Pp('Un asesor técnico de piso se rehúsa a cubrir un domingo de carrera atlética masiva: un evento del Club Kinetix con clínicas de técnica de carrera y entrenamientos sabatinos. Argumenta compromisos personales y falta de consideración directiva. El Store Manager necesita cobertura operativa urgente, pero el aviso fue tardío. No existe un protocolo claro de comunicación para ajustes de turno excepcionales.'),
+          H('3.3 Factores de Tensión y Restricciones'),
+          UL([{ v: 'El chatbot debe manejar la contención emocional antes de ofrecer soluciones procedimentales.' }, { v: 'Debe respetar la retroalimentación de doble vía: escuchar, validar emocionalmente y luego orientar.' }, { v: 'No puede tomar decisiones disciplinarias; solo puede orientar y escalar a RRHH cuando sea necesario.' }, { v: 'Debe funcionar para los 80 colaboradores en 9 sucursales, CEDIS y Corporativo.' }, { v: 'El eNPS organizacional es de 72.4 (Promotores: 61%, Pasivos: 24%, Detractores: 15%). El chatbot no debe empeorar estos números.' }]),
+          H('3.4 Resolución y Cierre'),
+          Pp('Diana presenta al CEO tres alternativas de arquitectura del chatbot:'),
+          OL([{ v: 'Chatbot reactivo: Solo responde cuando el colaborador inicia la conversación.' }, { v: 'Chatbot proactivo: Envía alertas preventivas cuando detecta patrones (ej: 2+ retardos en una semana).' }, { v: 'Chatbot híbrido: Reactivo para consultas + proactivo para alertas + escalamiento automático a RRHH para casos graves.' }]),
+          Pp('El CEO elige la opción 3 (híbrido) y pide un prototipo funcional para la siguiente semana.')
+        ],
+        obj: 'Diseñar un mecanismo de comunicación basado en IA para resolver conflictos laborales recurrentes, aplicando principios de retroalimentación de doble vía en un entorno automatizado.',
+        todo: [
+          { v: 'Diseña el árbol de decisión conversacional para al menos 2 de los 3 escenarios (mínimo 5 nodos por escenario). Cada nodo debe incluir:', subs: ['Mensaje del chatbot', 'Opciones de respuesta del usuario', 'Lógica de ramificación (qué camino sigue cada respuesta)'] },
+          { v: 'Redacta el prompt del sistema (system prompt) que instruya al chatbot sobre:', subs: ['Su identidad y tono (alineado con la cultura Fair Play de Kinetix)', 'Las políticas que debe conocer (protocolo de comisiones, garantía 30 días, cambio de turnos)', 'Los límites de su actuación (¿qué puede resolver y qué debe escalar?)', 'Cómo manejar la contención emocional antes de la solución procedimental'] },
+          { v: 'Incorpora la retroalimentación de doble vía en el flujo conversacional. El chatbot debe seguir esta secuencia:', subs: ['Escuchar y parafrasear la queja del colaborador', 'Validar emocionalmente: "Entiendo tu frustración..."', 'Ofrecer la solución basada en la política interna', 'Confirmar que el colaborador se siente escuchado antes de cerrar la conversación'] },
+          { v: 'Prototipa al menos 1 escenario completo usando una herramienta de IA generativa. Documenta:', subs: ['Los prompts que utilizaste para configurar el chatbot', 'Las respuestas generadas por la IA', 'Los ajustes que realizaste y el motivo de cada ajuste'] }
+        ],
+        crit: [['Coherencia y completitud del árbol de decisión', '25%', '2 escenarios, 5 nodos c/u'], ['Calidad y precisión del system prompt', '25%', 'Tono, políticas y límites'], ['Integración de retroalimentación de doble vía', '25%', '4 pasos presentes'], ['Funcionalidad del prototipo y documentación del proceso', '25%', 'Prototipo demostrable']],
+        align: 'Temas 5.1 y 5.3 — Términos 6, 7, 8, 18: Retroalimentación de doble vía, mensaje clave, ruido en la comunicación, herramienta colaborativa.',
+        cv: ['Árbol de decisión conversacional de al menos 2 escenarios (mínimo 5 nodos por escenario)', 'System prompt completo', 'Prototipo de al menos 1 escenario completo (enlace o capturas del funcionamiento)', 'Documentación: prompts utilizados, respuestas generadas por la IA y ajustes con su motivo'],
+        chk: ['Cada nodo tiene mensaje, opciones de respuesta y lógica de ramificación', 'El system prompt cubre identidad y tono, políticas, límites y contención emocional', 'El flujo sigue los 4 pasos de la retroalimentación de doble vía', 'El prototipo cubre al menos 1 escenario completo', 'Documenté prompts, respuestas y ajustes con su motivo', 'El documento incluye los nombres de todos los integrantes del equipo'],
+        mod: 'Trabajo grupal (equipos de 3-4 integrantes).' },
+      { n: 4, title: 'El Tablero que Nadie Tenía', short: 'Dashboard de pulso', tag: 'IA Analítica', ia: true, tema: 'Tema 5.3',
+        sub: 'Dashboard de Pulso Comunicacional con IA',
+        card: '12 días para consolidar datos dispersos en 6 sistemas diferentes.',
+        narr: [
+          FA([['Tema del temario', 'Tema 5.3 — Términos 16-20 (Repositorio, dashboard, herramienta colaborativa, automatización de reportes, toma de decisiones basada en datos)'], ['Uso de IA', 'Con IA — IA Analítica para visualización y automatización'], ['Modalidad', 'Grupal (equipos de 3-4 integrantes)'], ['Entregable', 'Prototipo de dashboard con 7 KPIs, 3 visualizaciones y reglas de automatización']]),
+          Pp('Consolidación de indicadores de asistencia, Evaluación 360°, ventas y alertas automatizadas en tiempo real.'),
+          H('4.1 Encuadre del Escenario'),
+          Pp('Es lunes 18 de noviembre de 2026. El CEO Alejandro Torres Villanueva (promedio 360° de 4.74, eNPS 92, clasificación Excepcional) convoca una reunión extraordinaria con sus 3 gerentes de área. El motivo: acaba de revisar los resultados consolidados de octubre y descubrió que tomó 12 días reunir toda la información necesaria para tener una foto completa de la organización.'),
+          Pp('Los datos estaban dispersos en 6 fuentes completamente separadas:'),
+          OL([{ v: 'El reporte de asistencia (generado por Capital Humano en Excel)' }, { v: 'La Encuesta 360° (procesada por consultores externos en PDF)' }, { v: 'Los reportes de venta por sucursal (en el sistema POS)' }, { v: 'Los registros del Movement Lab (en la app de la tablet)' }, { v: 'Los tickets de CX (en el sistema de atención al cliente)' }, { v: 'Los reportes de VM (en correos electrónicos de Fernanda Villanueva)' }]),
+          Pp('Torres Villanueva declara: "Tenemos $2,364,620 MXN en ventas, 80 colaboradores, 9 sucursales, 3 canales y 16 SKUs. Pero no tengo un solo lugar donde ver si la organización está sana o enferma en tiempo real."'),
+          H('4.2 El Incidente y la Evidencia'),
+          Pp('El CEO presenta los datos que le tomó 12 días consolidar manualmente.'),
+          H4('Indicadores de Asistencia (Octubre 2026)'),
+          TB(['Indicador', 'Valor actual', 'Meta', 'Estatus'], [['Tasa de asistencia efectiva', '94.3%', '>95%', 'Bajo meta'], ['Tasa de puntualidad', '89.1%', '≥92%', 'Bajo meta'], ['Tasa de faltas injustificadas', '3.4%', '<2%', 'Sobre meta'], ['Colaboradores con asistencia perfecta', '14 de 80 (17.5%)', '≥20%', 'Bajo meta'], ['Casos graves activos', '4 casos', '0', 'Crítico']], '580px'),
+          H4('Indicadores de Desempeño 360°'),
+          TB(['Competencia', 'Promedio organizacional', 'Meta', 'Brecha'], [['Promedio general', '3.94 / 5.0', '4.0', '-0.06'], ['Comunicación (COM)', '3.99 / 5.0', '4.0', '-0.01'], ['Liderazgo (LID)', '3.76 / 5.0', '4.0', '-0.24'], ['Innovación (INN)', '3.78 / 5.0', '4.0', '-0.22'], ['Trabajo en Equipo (TE)', '4.08 / 5.0', '4.0', '+0.08'], ['Brecha Flagship vs. Regionales', '4.24 vs. 3.67 promedio', '≤ 0.3', '0.57 pts']], '580px'),
+          H4('Estado por Sucursal (Octubre 2026)'),
+          TB(['Sucursal', 'Asistencia', 'Desempeño 360°', 'Ventas', 'Alerta'], [['Flagship Masaryk CDMX', '98.5%', '4.24', '$382,411', 'Modelo'], ['Flagship San Pedro MTY', '93.9%', '4.17', '$324,890', 'Monitoreo'], ['Concept Andares GDL', '82.6%', '3.72', '$184,320', '2 casos graves'], ['E-commerce', '100%', '3.85', '$368,450', 'Excelente'], ['Itinerante (VM)', '92.0%', 'N/A', 'N/A', '1 caso grave']], '640px'),
+          H('4.3 Factores de Tensión y Restricciones'),
+          UL([{ v: 'El CEO quiere un dashboard que cualquier Store Manager pueda consultar desde su celular.' }, { v: 'Debe incluir alertas automáticas cuando un indicador cruce un umbral crítico definido.' }, { v: 'No puede exponer datos individuales de desempeño a personas no autorizadas (solo agregados por sucursal).' }, { v: 'Debe ser actualizable semanalmente sin requerir un analista de datos dedicado a tiempo completo.' }, { v: 'El presupuesto de tecnología es limitado: Kinetix es una empresa de 80 personas con facturación de $2.36M MXN mensual.' }]),
+          H('4.4 Resolución y Cierre'),
+          Pp('Torres Villanueva asigna el proyecto a un equipo multidisciplinario:'),
+          UL([{ v: 'Diana Cruz (Marketing) para el diseño de la experiencia de usuario del dashboard' }, { v: 'Alejandra Ríos (Coordinadora CX, promedio 4.26) para definir los KPIs de servicio al cliente' }, { v: 'Roberto Hernández (Gerente Regional de Operaciones, promedio 4.46) para validar los KPIs operativos' }]),
+          Pp('El equipo tiene 2 semanas para presentar un prototipo de dashboard con al menos 7 KPIs y 3 visualizaciones funcionales.')
+        ],
+        obj: 'Diseñar un dashboard que transforme datos dispersos en información accionable, seleccionando KPIs comunicacionales relevantes y proponiendo reglas de automatización SI-ENTONCES para alertas en tiempo real.',
+        todo: [
+          { v: 'Selecciona 7 KPIs comunicacionales a partir de los datos del caso. Para cada KPI, define en una tabla:', subs: ['Nombre del KPI', 'Fórmula o fuente de datos', 'Umbral verde / amarillo / rojo', 'Frecuencia de actualización', 'Responsable de monitoreo'] },
+          { v: 'Diseña el layout del dashboard con zonas de alerta. Puedes usar herramientas de IA para generar el diseño visual o hacerlo con especificaciones claras en papel o documento.' },
+          { v: 'Crea al menos 3 visualizaciones usando herramientas de IA o analítica de datos:', subs: ['Una visualización de tendencia temporal (ej: asistencia semanal por sucursal)', 'Una visualización comparativa (ej: sucursales vs. meta de desempeño)', 'Una visualización de alerta (ej: semáforo de casos graves)'] },
+          { v: 'Propone 5 reglas de automatización con formato SI-ENTONCES. Ejemplo: "SI la asistencia de una sucursal cae por debajo del 90% por 2 semanas consecutivas, ENTONCES enviar alerta automática al Gerente Regional y al Store Manager."' }
+        ],
+        crit: [['Pertinencia y coherencia de los 7 KPIs seleccionados', '25%', 'Vinculados al caso real'], ['Diseño visual del dashboard (layout, zonas de alerta)', '25%', 'Usabilidad y claridad'], ['Calidad de las 3 visualizaciones', '25%', 'Tendencia, comparativa y alerta'], ['Lógica y completitud de las reglas de automatización', '25%', '5 reglas SI-ENTONCES']],
+        align: 'Tema 5.3 — Términos 16-20: Repositorio de información, dashboard (tablero de indicadores), herramienta colaborativa, automatización de reportes, toma de decisiones basada en datos.',
+        cv: ['Tabla de 7 KPIs (nombre, fórmula o fuente, umbrales verde / amarillo / rojo, frecuencia y responsable)', 'Layout del dashboard con zonas de alerta', 'Al menos 3 visualizaciones: tendencia temporal, comparativa y de alerta', 'Las 5 reglas de automatización en formato SI-ENTONCES'],
+        chk: ['Los 7 KPIs tienen fórmula, umbrales, frecuencia y responsable', 'El layout muestra las zonas de alerta', 'Incluí las visualizaciones de tendencia, comparativa y de alerta', 'Las 5 reglas siguen el formato SI-ENTONCES', 'El dashboard solo muestra agregados por sucursal, no datos individuales', 'El documento incluye los nombres de todos los integrantes del equipo'],
+        mod: 'Trabajo grupal (equipos de 3-4 integrantes).' },
+      { n: 5, title: 'Operación Kinetix 4.0', short: 'Entregable final', tag: 'IA Integrada', ia: true, tema: 'Temas 5.1, 5.2 y 5.3', final: true,
+        sub: 'Plan de Comunicación Integral con IA — Entregable Final del Módulo',
+        card: '38.8% "En Desarrollo" y brecha de 0.57 pts entre Flagship y Regionales.',
+        narr: [
+          FA([['Tema del temario', 'Temas 5.1, 5.2 y 5.3 — Los 20 términos del módulo integrados'], ['Uso de IA', 'Con IA — IA Integrada (Generativa + Analítica + Diseño)'], ['Modalidad', 'Individual o grupal (a criterio del docente)'], ['Entregable', 'Documento ejecutivo con 5 secciones obligatorias más presentación al Comité Directivo'], ['Fecha de entrega', 'Lunes 2 de diciembre de 2026 (simulado)']]),
+          Pp('Presentación ejecutiva del Plan de Comunicación Integral y gestión del cambio organizacional ante el Comité Directivo.'),
+          H('5.1 Encuadre del Escenario'),
+          Pp('Es viernes 29 de noviembre de 2026. Han pasado 4 semanas desde que el CEO Alejandro Torres Villanueva declaró la necesidad de transformar la comunicación organizacional de Kinetix. En ese tiempo, la organización ha recorrido un camino de aprendizaje acelerado:'),
+          UL([{ v: 'Se mapearon los flujos de comunicación (Actividad 1) y se descubrieron 5 puntos ciegos críticos en la estructura organizacional.' }, { v: 'Se diagnosticó la crisis de Andares GDL (Actividad 2) como un problema sistémico, no individual, con evidencia cuantitativa sólida.' }, { v: 'Se diseñó el chatbot "Fair Play Digital" (Actividad 3) y se prototipó con éxito para los 3 escenarios de conflicto más recurrentes.' }, { v: 'Se creó el Dashboard de Pulso Comunicacional (Actividad 4) con 7 KPIs, alertas automáticas y 3 visualizaciones funcionales.' }]),
+          Pp('Ahora, Torres Villanueva enfrenta el desafío más complejo: comunicar el cambio a los 80 colaboradores. La implementación de herramientas de IA en una organización donde el 38.8% de la plantilla está clasificada como "En Desarrollo" y el 2.5% "Requiere Mejora" no será trivial.'),
+          H('5.2 El Mapa de Adopción al Cambio'),
+          H4('Segmento de riesgo alto (resistencia probable)'),
+          TB(['Segmento', 'Número', '%', 'Características', 'Riesgo'], [['"Requiere Mejora"', '2', '2.5%', 'Alejandro Silva (3.36) y Esteban Aguilar (3.33)', 'Resistencia Alta'], ['"En Desarrollo"', '31', '38.8%', 'Promedio 3.50-3.79, Líderes Técnicos regionales', 'Resistencia Media'], ['CEDIS + CX', '13', '16.3%', 'Promedios 3.83 y 3.84 respectivamente', 'Resistencia Latente']], '700px'),
+          H4('Segmento de adopción temprana (champions del cambio)'),
+          TB(['Segmento', 'Número', '%', 'Características'], [['"Excepcional"', '3', '3.8%', 'CEO (4.74), Carlos Mendoza (4.70), Mariana Garza (4.71)'], ['"Sobresaliente"', '12', '15%', 'Store Managers Flagship, Gerentes de Área y Top Asesores'], ['"Competente"', '32', '40%', 'Núcleo estable de la organización; adoptadores tempranos potenciales']], '640px'),
+          H('5.3 Factores de Tensión y Restricciones'),
+          Pp('El plan de implementación incluye 3 herramientas nuevas:'),
+          OL([{ v: 'Chatbot Fair Play Digital en la app Kinetix HR (para mediación y consultas de protocolo).' }, { v: 'Dashboard de Pulso Comunicacional (para monitoreo organizacional en tiempo real).' }, { v: 'Protocolo de Comunicación de Emergencia (para decisiones urgentes interdepartamentales).' }]),
+          Pp('Sin embargo, la implementación enfrenta tensiones concretas:'),
+          UL([{ v: 'Los 9 Store Managers tienen autonomía operativa (descuentos hasta 15%, garantías hasta $6,000 MXN, reprogramación de turnos). Cualquier herramienta nueva debe respetar esa autonomía, no reducirla.' }, { v: 'Los 36 Asesores Técnicos ganan comisión directa del 1.5% sobre venta neta. Si perciben que el chatbot o el dashboard "los vigila", podrían resistirse activamente.' }, { v: 'El equipo de CEDIS (6 personas, promedio 3.83) y CX (7 personas, promedio 3.84) son los departamentos con menor desempeño. Son también los que más se beneficiarían de las herramientas, pero potencialmente los más resistentes.' }, { v: 'La brecha de 0.57 puntos entre Flagship (4.24) y sucursales regionales (3.67) significa que la adopción será geográficamente desigual.' }, { v: 'El eNPS de 72.4 es positivo pero frágil: 15% son detractores. Una implementación mal comunicada podría convertir pasivos en detractores.' }]),
+          H('5.4 Las Cinco Preguntas del Comité Directivo'),
+          Pp('Torres Villanueva pide un Plan de Comunicación Integral que responda a 5 preguntas clave antes del lunes 2 de diciembre:'),
+          OL([{ v: '¿Cómo fluye la información hoy y cómo debería fluir en el nuevo ecosistema?' }, { v: '¿Dónde están las fallas comunicacionales que las herramientas de IA van a resolver?' }, { v: '¿Qué canales actuales son ricos y cuáles son pobres? ¿Cómo potencia la IA cada canal?' }, { v: '¿Cómo se organiza el ecosistema digital (chatbot + dashboard + protocolo) como sistema coherente?' }, { v: '¿Cómo comunicamos el cambio a los 80 colaboradores sin generar resistencia?' }])
+        ],
+        obj: 'Integrar todos los conceptos del módulo en un plan de comunicación ejecutivo que combine diagnóstico humano con herramientas de IA, incluyendo una estrategia de gestión del cambio organizacional. Esta actividad es el entregable final del Módulo 5.',
+        todoIntro: 'Elabora un documento ejecutivo que responda a las 5 preguntas del Comité Directivo de Kinetix mediante las siguientes secciones obligatorias:',
+        todo: [
+          { v: 'Sección 1 — Mapeo del Flujo de Información. Presenta el mapa de flujos refinado (evolución de la Actividad 1) ya digitalizado con herramientas de IA. Señala los flujos que se mantienen manuales y los que se automatizan con el nuevo ecosistema.' },
+          { v: 'Sección 2 — Diagnóstico de Fallas Comunicacionales. Sintetiza los hallazgos de la Actividad 2 incorporando los datos de la Encuesta 360° (COM: 3.99, LID: 3.76, INN: 3.78). Presenta la correlación entre desempeño y asistencia como evidencia del problema sistémico.' },
+          { v: 'Sección 3 — Análisis de Canales de Comunicación. Evalúa la riqueza de cada canal actual: presencial en tienda (60.5%), digital/e-commerce (19.2%), B2B institucional (20.3%) y comunicación interna (app Kinetix HR, correo, reuniones). Propone cómo la IA potencia cada canal.' },
+          { v: 'Sección 4 — Plan de Organización Informativa Digital. Integra el chatbot Fair Play Digital (Actividad 3) y el Dashboard de Pulso Comunicacional (Actividad 4) en un ecosistema digital coherente. Define roles, responsabilidades de monitoreo y gobernanza de datos.' },
+          { v: 'Sección 5 — Plan de Comunicación de la Mejora. Diseña la estrategia para comunicar a los 80 colaboradores la implementación de las nuevas herramientas. Incluye:', subs: ['Mensajes segmentados por audiencia: Excepcionales/Sobresalientes vs. En Desarrollo vs. Requiere Mejora.', 'Calendario de implementación por fases geográficas (Flagship primero, luego regionales).', 'Identificación de los champions del cambio y definición de su rol en la adopción.'] }
+        ],
+        crit: [['Sección 1 — Mapeo del Flujo de Información', '20%', 'Mapa digitalizado, flujos manuales vs. automatizados identificados'], ['Sección 2 — Diagnóstico de Fallas Comunicacionales', '20%', 'Evidencia 360° integrada, correlación desempeño-asistencia'], ['Sección 3 — Análisis de Canales', '20%', '4 canales evaluados, propuesta de potenciación con IA'], ['Sección 4 — Plan de Organización Informativa Digital', '20%', 'Ecosistema chatbot + dashboard integrado, roles definidos'], ['Sección 5 — Plan de Comunicación de la Mejora', '20% + 10% bonus', 'Mensajes segmentados, calendario por fases, champions identificados']],
+        align: 'Temas 5.1, 5.2 y 5.3 — Los 20 términos del módulo integrados: comunicación estratégica, canales, retroalimentación, ruido, cuellos de botella, gestión de la información, flujo, información accionable, fuentes confiables, infoxicación, repositorio, dashboard, herramienta colaborativa, automatización de reportes y toma de decisiones basada en datos.',
+        cv: ['Documento ejecutivo con las 5 secciones obligatorias', 'Presentación al Comité Directivo', 'Fecha de entrega: lunes 2 de diciembre de 2026 (simulado)'],
+        chk: ['El documento tiene las 5 secciones obligatorias y responde las 5 preguntas del Comité', 'La Sección 1 distingue flujos manuales de automatizados', 'La Sección 2 integra la Encuesta 360° y la correlación desempeño-asistencia', 'La Sección 3 evalúa los 4 canales y cómo la IA los potencia', 'La Sección 4 define roles, monitoreo y gobernanza de datos', 'La Sección 5 incluye mensajes segmentados, calendario por fases y champions', 'Adjunté también la presentación al Comité Directivo'],
+        mod: 'Trabajo individual o grupal, a criterio del docente.' }
+    ];
+
+    const gloss1 = [['1', 'Comunicación estratégica', 'Proceso deliberado de diseñar y gestionar mensajes alineados con los objetivos organizacionales.', '1'], ['2', 'Canal de comunicación', 'Medio o vía a través del cual se transmite un mensaje (oral, escrito, electrónico, visual).', '1'], ['3', 'Comunicación descendente', 'Flujo de información desde niveles jerárquicos superiores hacia niveles inferiores.', '1'], ['4', 'Comunicación ascendente', 'Flujo de información desde niveles operativos hacia la dirección o gerencia.', '1'], ['5', 'Comunicación horizontal', 'Intercambio de información entre unidades o personas del mismo nivel jerárquico.', '1'], ['6', 'Retroalimentación de doble vía', 'Sistema de comunicación en el que el receptor también emite respuesta al emisor, creando un ciclo bidireccional.', '3'], ['7', 'Mensaje clave', 'Idea central que se desea comunicar y que debe ser comprendida por el receptor de forma precisa.', '3'], ['8', 'Ruido en la comunicación', 'Cualquier factor que distorsiona, interrumpe o altera la transmisión fiel del mensaje.', '1'], ['9', 'Comunicación efectiva', 'Proceso de transmisión en el que el mensaje es recibido, comprendido y responde a su intención original.', '1, 5'], ['10', 'Cuello de botella comunicacional', 'Punto de la estructura organizacional donde el flujo de información se ralentiza o bloquea de forma crítica.', '1']];
+    const gloss2 = [['11', 'Gestión de la información', 'Conjunto de procesos para recopilar, organizar, almacenar y distribuir información de forma eficiente.', '2, 4'], ['12', 'Flujo de información', 'Movimiento y trayectoria de los datos dentro de una organización, desde su origen hasta su uso.', '1, 5'], ['13', 'Información accionable', 'Dato que permite tomar una decisión o ejecutar una acción concreta y verificable.', '2'], ['14', 'Fuente de información confiable', 'Origen de datos que garantiza precisión, oportunidad, relevancia y verificabilidad.', '2'], ['15', 'Sobrecarga de información (infoxicación)', 'Estado en el que el volumen de información disponible supera la capacidad de procesamiento efectivo.', '2'], ['16', 'Repositorio de información', 'Sistema centralizado donde se almacena, organiza y recupera información de forma estructurada.', '4'], ['17', 'Dashboard (tablero de indicadores)', 'Interfaz visual que consolida y presenta indicadores clave para facilitar la toma de decisiones.', '4'], ['18', 'Herramienta colaborativa', 'Tecnología que facilita el trabajo conjunto entre personas, equipos o áreas geográficamente dispersas.', '3'], ['19', 'Automatización de reportes', 'Proceso mediante el cual la generación y distribución de informes se realiza de forma automática.', '4'], ['20', 'Toma de decisiones basada en datos', 'Proceso en el que las decisiones directivas se fundamentan en evidencia cuantitativa y analítica verificable.', '4, 5']];
+
+    const pages = {};
+    pages.home = { eyebrow: 'Casos de estudio · Kinetix Performance Sports', title: 'Consulta cada caso del Módulo 5', sub: 'Cinco casos progresivos sobre comunicación y gestión de la información con IA. Elige un caso en el menú: cada uno se divide en Narrativa, Actividad y Evaluación y entrega.', showCanvasBar: false, blocks: [
+      CO('canvas', 'Importante', 'Tus respuestas a todas las actividades se suben a Canvas, en la tarea de cada caso. Este sitio es solo de consulta: no recibe entregas.'),
+      { t: 'cards' },
+      H('Antes de empezar'),
+      UL([{ v: 'Lee el caso narrativo completo antes de revisar las instrucciones de la actividad.' }, { v: 'Los casos 1 y 2 deben resolverse sin el uso de herramientas de IA.' }, { v: 'Los casos 3, 4 y 5 integran herramientas de IA como parte del proceso de solución.' }, { v: 'Cada actividad contiene criterios de evaluación explícitos que suman el 100% de la calificación.' }, { v: 'Los casos son progresivos: cada entregable alimenta el siguiente.' }, { v: 'El Caso 5 es el entregable integrador final del módulo.' }]),
+      CO('nota', 'Nota académica', 'Este caso es completamente ficticio. Los nombres, datos y situaciones son creados con fines didácticos.')
+    ] };
+    pages.intro = { eyebrow: 'Introducción', title: 'Introducción y contexto', sub: 'Certificación en Desarrollo de Competencias Gerenciales · Posgrado — Maestría en Dirección Estratégica · Noviembre – Diciembre 2026', blocks: [
+      H('Introducción al Documento de Casos'),
+      Pp('Este documento contiene cinco casos de estudio progresivos diseñados para el Módulo 5 — Comunicación y Gestión de la Información con IA — de la Certificación en Desarrollo de Competencias Gerenciales de la Universidad Anáhuac Mayab. Todos los casos están anclados en la empresa ficticia Kinetix Performance Sports y presentan problemas organizacionales reales con datos numéricos verificables internamente.'),
+      Pp('La progresión pedagógica sigue una lógica deliberada: los primeros dos casos se resuelven sin el apoyo de herramientas de Inteligencia Artificial (IA), lo que obliga al estudiante a desarrollar primero el pensamiento analítico y crítico. A partir del tercer caso, la IA se incorpora como herramienta de diseño y amplificación de soluciones ya diagnosticadas. El quinto caso es el entregable final integrador.'),
+      H('Contexto Organizacional: Kinetix Performance Sports'),
+      Pp('Kinetix Performance Sports es una empresa especializada en equipamiento deportivo de alto rendimiento con presencia nacional. Opera 9 sucursales activas en 8 ciudades mexicanas — CDMX, Monterrey, Guadalajara, Puebla, Querétaro, Mérida, León y Lerma —, un canal de e-commerce propio y un canal B2B con 25 clubes atléticos aliados. Su plantilla es de 80 colaboradores.'),
+      H('Resumen de la Progresión Pedagógica'),
+      TB(['#', 'Caso', 'Problema ancla', 'Uso de IA', 'Tema'], cases.map(c => [String(c.n), '“' + c.title + '”', { 1: 'Compra urgente de AeroStrata sin comunicación interdepartamental', 2: 'Sucursal con 82.6% asistencia, 2 casos graves, conflictos de comisiones', 3: '3 escenarios de conflicto recurrente: comisiones, garantías, turnos', 4: '12 días para consolidar datos dispersos en 6 sistemas diferentes', 5: '38.8% “En Desarrollo” + brecha 0.57 pts Flagship vs. Regionales' }[c.n], c.tag, c.tema]), '760px'),
+      CO('canvas', 'Entrega', 'Todas las respuestas se suben a Canvas.')
+    ] };
+    pages.canvas = { eyebrow: 'Entrega', title: 'Cómo entregar en Canvas', sub: 'Las respuestas de los cinco casos se suben a Canvas. Este sitio no recibe entregas.', blocks: [
+      H('Pasos'),
+      OL([{ v: 'Ingresa a tu curso del Módulo 5 en Canvas.' }, { v: 'Abre la tarea de la actividad que vas a entregar.' }, { v: 'Adjunta tu entrega en un archivo legible. Si trabajaste en papel, rotafolio o pizarrón, sube una fotografía o escaneo claro.' }, { v: 'Si el trabajo es grupal, incluye los nombres de todos los integrantes en el documento.' }, { v: 'Confirma que el archivo abre correctamente y envía.' }]),
+      H('Qué se entrega en cada actividad'),
+      TB(['Actividad', 'Entregable en Canvas', 'Modalidad', 'IA'], cases.map(c => ['Caso ' + c.n + ' · ' + c.title, c.cv.join('; ') + '.', c.mod.replace('.', ''), c.tag]), '760px'),
+      CO('canvas', 'Fecha', 'Caso 5: lunes 2 de diciembre de 2026 (simulado). Para las demás actividades, revisa la fecha de cierre en la tarea de Canvas.')
+    ] };
+    pages.glosario = { eyebrow: 'Anexo 1 · Referencia conceptual', title: 'Glosario de términos del Módulo 5', sub: 'Los 20 términos clave son la base conceptual de todos los casos de estudio. Cada actividad aplica estos términos en contextos organizacionales reales.', blocks: [
+      H('Bloque 1 — Comunicación Estratégica (Tema 5.1)'), TB(['#', 'Término', 'Definición didáctica', 'Caso ancla'], gloss1, '720px'),
+      H('Bloque 2 — Gestión de la Información y Tecnología (Temas 5.2 y 5.3)'), TB(['#', 'Término', 'Definición didáctica', 'Caso ancla'], gloss2, '720px')
+    ] };
+    pages.perfil = { eyebrow: 'Anexo 2 · Datos de referencia', title: 'Perfil organizacional de Kinetix', sub: 'Línea base para consultar durante los cinco casos. Todos los datos son ficticios y de uso exclusivamente didáctico.', blocks: [
+      H('Estructura organizacional'),
+      TB(['Área / Gerencia', 'Responsable', 'Colaboradores', 'Promedio 360°', 'eNPS'], [['CEO / Dirección General', 'Ing. Alejandro Torres Villanueva', '1', '4.74 (Excepcional)', '92'], ['Compras y Cadena de Suministro', 'Lic. Patricia Guerrero Salinas', '3', 'N/D', 'N/D'], ['Operaciones Retail & CEDIS', 'Lic. Roberto Hernández Mora', '59', '4.46 (Sobresaliente)', '78'], ['Marketing, CX & Alianzas', 'Mtra. Diana Cruz Espinoza', '10', '4.63 (Excepcional)', '85'], ['CEDIS (Logística y Fulfillment)', 'Ing. Raúl Domínguez Paredes', '6', '3.83 (En Desarrollo)', '62'], ['Experiencia del Cliente (CX)', 'Lic. Alejandra Ríos Mendoza', '7', '3.84 (En Desarrollo)', '64']], '720px'),
+      H('Red de sucursales (octubre 2026)'),
+      TB(['Sucursal', 'Ciudad', 'Formato', 'Store Manager', 'Ventas oct.', 'Asistencia'], [['Flagship Masaryk', 'CDMX', 'Flagship', 'Carmen Sánchez Nava', '$382,411', '98.5%'], ['Concept Santa Fe', 'CDMX', 'Concept', 'N/D', 'N/D', 'N/D'], ['Flagship San Pedro', 'Monterrey', 'Flagship', 'N/D', '$324,890', '93.9%'], ['Concept Andares', 'Guadalajara', 'Concept', 'Lorena Figueras López', '$184,320', '82.6%'], ['Concept Angelópolis', 'Puebla', 'Concept', 'N/D', 'N/D', 'N/D'], ['Concept Antea', 'Querétaro', 'Concept', 'N/D', 'N/D', 'N/D'], ['Concept Altabrisa', 'Mérida', 'Concept', 'N/D', 'N/D', 'N/D'], ['Concept Plaza Mayor', 'León', 'Concept', 'N/D', 'N/D', 'N/D'], ['Outlet Performance Lerma', 'Lerma', 'Outlet', 'N/D', 'N/D', 'N/D'], ['E-commerce', 'Nacional', 'Digital', 'N/D', '$368,450', '100%']], '760px'),
+      H('Indicadores globales del módulo'),
+      TB(['Indicador organizacional', 'Valor octubre 2026', 'Meta'], [['Ventas totales organización', '$2,364,620 MXN', 'N/D'], ['Total colaboradores', '80 personas', 'N/D'], ['Promedio 360° organizacional', '3.94 / 5.0', '4.0 / 5.0'], ['Competencia COM (Comunicación)', '3.99 / 5.0', '4.0 / 5.0'], ['eNPS organizacional', '72.4', '≥75'], ['Tasa de asistencia efectiva', '94.3%', '>95%'], ['Canal presencial (% ventas)', '60.5%', 'N/D'], ['Canal digital / e-commerce', '19.2%', 'N/D'], ['Canal B2B institucional', '20.3%', 'N/D'], ['Colaboradores “En Desarrollo”', '31 (38.8%)', '< 30%']], '560px')
+    ] };
+
+    const secs = [['narrativa', 'Narrativa'], ['actividad', 'Actividad'], ['evaluacion', 'Evaluación y entrega']];
+    cases.forEach(c => {
+      const eb = 'Caso 0' + c.n + ' · Módulo 5';
+      const base = { eyebrow: eb, tag: c.tag, tagIa: c.ia, title: c.title, sub: c.sub, caseN: c.n };
+      pages['c' + c.n + '-narrativa'] = { ...base, blocks: c.narr };
+      pages['c' + c.n + '-actividad'] = { ...base, showCanvasBar: true, blocks: [
+        CO('obj', 'Objetivo de aprendizaje', c.obj),
+        c.ia ? CO('ia', 'Uso de IA', c.final ? 'Esta actividad incorpora IA Integrada (Generativa + Analítica + Diseño) como herramienta central. Es el entregable final del Módulo 5.' : c.n === 3 ? 'Esta actividad incorpora el uso de herramientas de IA Generativa como parte central del proceso.' : 'Esta actividad incorpora el uso de herramientas de IA Analítica y de Visualización de Datos.') : CO('noia', 'Sin IA', 'Esta actividad se realiza completamente SIN el uso de herramientas de Inteligencia Artificial.'),
+        H(c.final ? 'Estructura del documento ejecutivo' : 'Lo que debes hacer'),
+        ...(c.todoIntro ? [Pp(c.todoIntro)] : []),
+        { t: 'ol', items: c.todo }
+      ] };
+      pages['c' + c.n + '-evaluacion'] = { ...base, showCanvasBar: false, blocks: [
+        H('Criterios de evaluación'),
+        CRIT(c.crit),
+        Pp('Alineación temática. ' + c.align),
+        CV('Sube tu respuesta de la Actividad ' + c.n + ' a Canvas', c.mod + ' Tu entrega se realiza en Canvas, en la tarea correspondiente a esta actividad.', c.cv.map(v => ({ v })), c.ia ? 'Esta actividad incorpora IA: documenta las herramientas y los prompts que utilizaste.' : 'Esta actividad se resuelve sin herramientas de IA.'),
+        { t: 'check', key: 'c' + c.n, items: c.chk }
+      ] };
+      secs.forEach(s => { pages['c' + c.n + '-' + s[0]].secLabel = s[1]; });
+    });
+
+    const order = ['home', 'intro', ...cases.flatMap(c => secs.map(s => 'c' + c.n + '-' + s[0])), 'canvas', 'glosario', 'perfil'];
+    this._d = { cases, pages, secs, order };
+    return this._d;
+  }
+
+  renderVals() {
+    const { cases, pages, secs, order } = this.data();
+    const { route, narrow, menu, checks } = this.state;
+    const key = pages[route] ? route : 'home';
+    const pg = pages[key];
+    const m = key.match(/^c(\d)-(\w+)$/);
+    const curCase = m ? +m[1] : 0;
+    const curSec = m ? m[2] : '';
+    const ORANGE = 'var(--orange)', BLK = 'var(--rich-black)';
+
+    const link = (label, href, k) => ({ isLink: true, label, href, bg: key === k ? 'var(--orange-100)' : 'transparent', fg: key === k ? 'var(--orange-700)' : BLK });
+    const nav = [
+      link('Inicio', '#home', 'home'),
+      link('Introducción y contexto', '#intro', 'intro'),
+      { isLabel: true, label: 'Casos de estudio' },
+      ...cases.map(c => ({
+        isCase: true, n: c.n, title: c.title, tag: c.tag + ' · ' + c.tema, href: '#c' + c.n + '-narrativa',
+        open: curCase === c.n, bg: curCase === c.n ? '#fff' : 'transparent', fg: BLK,
+        chipBg: curCase === c.n ? ORANGE : 'var(--gray-200)', chipFg: BLK,
+        subs: secs.map(s => ({ label: s[1], href: '#c' + c.n + '-' + s[0], fw: curCase === c.n && curSec === s[0] ? 800 : 600, bg: curCase === c.n && curSec === s[0] ? 'var(--orange-100)' : 'transparent', fg: curCase === c.n && curSec === s[0] ? 'var(--orange-700)' : BLK }))
+      })),
+      { isLabel: true, label: 'Entrega' },
+      link('Cómo entregar en Canvas', '#canvas', 'canvas'),
+      { isLabel: true, label: 'Anexos' },
+      link('Glosario de términos', '#glosario', 'glosario'),
+      link('Perfil de Kinetix', '#perfil', 'perfil')
+    ];
+
+    const tabs = m ? secs.map(s => ({ label: s[1], href: '#c' + curCase + '-' + s[0], bg: curSec === s[0] ? ORANGE : 'transparent', fg: curSec === s[0] ? BLK : '#fff', bd: curSec === s[0] ? ORANGE : '#6B6B6B' })) : [];
+
+    const toggleCheck = k => () => {
+      const c = { ...this.state.checks, [k]: !this.state.checks[k] };
+      try { localStorage.setItem('kx5-checks', JSON.stringify(c)); } catch (e) {}
+      this.setState({ checks: c });
+    };
+    const toneMap = { obj: ['var(--orange-50)', BLK, 'var(--orange-700)'], noia: [BLK, '#fff', ORANGE], ia: ['var(--orange-100)', BLK, 'var(--orange-700)'], nota: ['var(--gray-100)', BLK, 'var(--gray-600)'], canvas: [ORANGE, BLK, BLK] };
+    const mapCells = r => ({ cells: r.map((v, i) => ({ v, fw: i === 0 ? 700 : 500 })) });
+
+    const blocks = pg.blocks.map(b => {
+      const o = { ...b, isH: b.t === 'h', isH4: b.t === 'h4', isP: b.t === 'p', isList: b.t === 'ul' || b.t === 'ol', isTable: b.t === 'table', isFacts: b.t === 'facts', isCallout: b.t === 'callout', isCanvas: b.t === 'canvas', isCheck: b.t === 'check', isCards: b.t === 'cards' };
+      if (o.isList) { o.mkBg = b.t === 'ol' ? 'var(--orange-100)' : 'transparent'; o.items = b.items.map((it, i) => ({ v: it.v, mk: b.t === 'ol' ? String(i + 1) : '•', subs: (it.subs || []).map(v => ({ v })) })); if (b.t === 'ul') o.mkBg = 'transparent'; }
+      if (o.isTable) { o.head = b.head.map(v => ({ v })); o.rows = b.rows.map(mapCells); o.cols = b.head.length === 2 ? 'minmax(160px,1fr) 2fr' : b.head.length === 3 ? '1.3fr .7fr 1.6fr' : b.head.length === 4 ? '1.2fr 1fr 1fr 1fr' : 'repeat(' + b.head.length + ',minmax(0,1fr))'; if (b.head[0] === '#') o.cols = '48px 1.3fr 2.4fr 80px'; if (b.head[0] === 'Criterio') o.cols = '1.6fr .6fr 1.4fr'; if (b.head[0] === 'Segmento') o.cols = b.head.length === 5 ? '1.1fr .6fr .5fr 1.8fr 1fr' : '1.1fr .6fr .5fr 2fr'; if (b.head[0] === 'Actividad') o.cols = '1fr 2.2fr 1fr .8fr'; o.minW = b.minW || '560px'; if (b.head.length === 5 && b.head[0] === '#') o.cols = '40px 1.1fr 2fr 1fr 1fr'; }
+      if (o.isFacts) o.rows = b.rows.map((r, i) => ({ k: r[0], v: r[1], bt: i ? '1px solid var(--border-subtle)' : '0' }));
+      if (o.isCallout) { const t = toneMap[b.tone]; o.bg = t[0]; o.fg = t[1]; o.kfg = t[2]; }
+      if (o.isCanvas) o.items = b.items;
+      if (o.isCheck) o.items = b.items.map((v, i) => { const k = b.key + '-' + i; const on = !!checks[k]; return { v, mark: on ? '✓' : '', bg: on ? ORANGE : '#fff', toggle: toggleCheck(k) }; });
+      if (o.isCards) o.items = cases.map(c => ({ href: '#c' + c.n + '-narrativa', n: '0' + c.n, title: c.title, sub: c.card, tag: c.tag, bg: c.final ? ORANGE : c.ia ? 'var(--orange-50)' : '#fff', fg: BLK, nfg: c.final ? BLK : 'var(--orange-700)', sfg: c.final ? BLK : 'var(--raisin-black)', tagBg: c.final ? BLK : c.ia ? 'var(--orange-100)' : 'var(--gray-100)', tagFg: c.final ? '#fff' : BLK }));
+      return o;
+    });
+    // canvas callout page-header tag styles
+    const page = { ...pg, hasSub: !!pg.sub, hasTag: !!pg.tag, tagBg: pg.tagIa ? ORANGE : '#fff', tagFg: BLK, hasTabs: !!m, tabs, showCanvasBar: !!pg.showCanvasBar, canvasHref: '#c' + curCase + '-evaluacion' };
+
+    const idx = order.indexOf(key);
+    const lab = k => { const p = pages[k]; if (!p) return ''; return p.caseN ? 'Caso ' + p.caseN + ' · ' + p.secLabel : p.title; };
+    const prev = idx > 0 ? { href: '#' + order[idx - 1], label: lab(order[idx - 1]) } : { href: '#home', label: '' };
+    const next = idx < order.length - 1 ? { href: '#' + order[idx + 1], label: lab(order[idx + 1]) } : { href: '#home', label: '' };
+
+    return {
+      nav, page, blocks, narrow, prev, next, hasPrev: idx > 0, hasNext: idx < order.length - 1,
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      overlay: narrow && menu,
+      sbPos: narrow ? 'fixed' : 'sticky', sbTop: '64px', sbHeight: narrow ? 'auto' : 'calc(100vh - 64px)',
+      sbDisplay: narrow && !menu ? 'none' : 'flex', sbShadow: narrow ? 'var(--shadow-lg)' : 'none',
+      heroPad: narrow ? '40px 20px' : '64px 56px 56px', bodyPad: narrow ? '28px 20px 48px' : '40px 56px 64px',
+      h1Size: narrow ? '34px' : '52px'
+    };
+  }
+}
+</script>
+</body>
+</html>
