@@ -1,239 +1,348 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Módulo 5 · Casos Kinetix</title>
-<script src="./support.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Módulo 5 · Casos Kinetix</title>
+  <script src="./support.js"></script>
 </head>
+
 <body>
-<x-dc>
-<helmet>
-<link rel="stylesheet" href="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/tokens/colors.css">
-<link rel="stylesheet" href="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/tokens/typography.css">
-<link rel="stylesheet" href="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/tokens/spacing.css">
-<link rel="stylesheet" href="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/tokens/base.css">
-<link rel="stylesheet" href="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/styles.css">
-<script src="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/_ds_bundle.js"></script>
-<style>html{scroll-behavior:smooth}body{background:#fff}</style>
-</helmet>
-<div style="min-height:100vh;display:flex;flex-direction:column;font-family:var(--font-sans);color:var(--text-body)">
-  <header style="position:sticky;top:0;z-index:30;height:64px;background:#fff;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 24px">
-    <div style="display:flex;align-items:center;gap:14px;min-width:0">
-      <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
-        <button onClick="{{ toggleMenu }}" aria-label="Menú" style="width:44px;height:44px;border-radius:12px;border:1px solid var(--border-strong);background:#fff;font-size:20px;font-weight:800;cursor:pointer">☰</button>
-      </sc-if>
-      <a href="#home" style="display:flex;flex-direction:column;line-height:1.15;text-decoration:none;min-width:0">
-        <span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)">Universidad Anáhuac Mayab</span>
-        <span style="font-size:16px;font-weight:800;color:var(--rich-black);letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Módulo 5 · Casos Kinetix</span>
-      </a>
-    </div>
-    <x-import component-from-global-scope="AnHuacMayabEducarParaTransformar_44f5d9.Button" href="#canvas" size="sm" hint-size="auto,40px">Entregas en Canvas</x-import>
-  </header>
+  <x-dc>
+    <helmet>
+      <link rel="stylesheet"
+        href="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/tokens/colors.css">
+      <link rel="stylesheet"
+        href="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/tokens/typography.css">
+      <link rel="stylesheet"
+        href="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/tokens/spacing.css">
+      <link rel="stylesheet"
+        href="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/tokens/base.css">
+      <link rel="stylesheet"
+        href="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/styles.css">
+      <script
+        src="_ds/an-huac-mayab-educar-para-transformar-44f5d926-dece-4fcd-94fa-821a7f910bd0/_ds_bundle.js"></script>
+      <style>
+        html {
+          scroll-behavior: smooth
+        }
 
-  <div style="display:flex;flex:1;align-items:flex-start">
-    <aside style="position:{{ sbPos }};top:{{ sbTop }};left:0;bottom:0;z-index:20;display:{{ sbDisplay }};flex-direction:column;gap:4px;width:300px;flex:none;height:{{ sbHeight }};overflow-y:auto;background:var(--gray-100);padding:24px 16px 48px;box-shadow:{{ sbShadow }}">
-      <sc-for list="{{ nav }}" as="e" hint-placeholder-count="8">
-        <div style="display:flex;flex-direction:column;gap:2px">
-          <sc-if value="{{ e.isLabel }}" hint-placeholder-val="{{ false }}">
-            <div style="margin:20px 12px 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-600)">{{ e.label }}</div>
+        body {
+          background: #fff
+        }
+      </style>
+    </helmet>
+    <div
+      style="min-height:100vh;display:flex;flex-direction:column;font-family:var(--font-sans);color:var(--text-body)">
+      <header
+        style="position:sticky;top:0;z-index:30;height:64px;background:#fff;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 24px">
+        <div style="display:flex;align-items:center;gap:14px;min-width:0">
+          <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ toggleMenu }}" aria-label="Menú"
+              style="width:44px;height:44px;border-radius:12px;border:1px solid var(--border-strong);background:#fff;font-size:20px;font-weight:800;cursor:pointer">☰</button>
           </sc-if>
-          <sc-if value="{{ e.isLink }}" hint-placeholder-val="{{ true }}">
-            <a href="{{ e.href }}" style="display:block;padding:10px 12px;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none;background:{{ e.bg }};color:{{ e.fg }}" style-hover="background:var(--gray-200)">{{ e.label }}</a>
-          </sc-if>
-          <sc-if value="{{ e.isCase }}" hint-placeholder-val="{{ false }}">
-            <a href="{{ e.href }}" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;text-decoration:none;background:{{ e.bg }};color:{{ e.fg }}" style-hover="background:var(--gray-200)">
-              <span style="flex:none;width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;background:{{ e.chipBg }};color:{{ e.chipFg }}">{{ e.n }}</span>
-              <span style="display:flex;flex-direction:column;line-height:1.25;min-width:0">
-                <span style="font-size:15px;font-weight:700">{{ e.title }}</span>
-                <span style="font-size:12px;font-weight:600;color:var(--gray-600)">{{ e.tag }}</span>
-              </span>
-            </a>
-            <sc-if value="{{ e.open }}" hint-placeholder-val="{{ false }}">
-              <div style="display:flex;flex-direction:column;gap:2px;margin:2px 0 8px 27px;padding-left:14px;border-left:2px solid var(--orange)">
-                <sc-for list="{{ e.subs }}" as="s" hint-placeholder-count="3">
-                  <a href="{{ s.href }}" style="display:block;padding:8px 12px;border-radius:10px;font-size:14px;font-weight:{{ s.fw }};text-decoration:none;background:{{ s.bg }};color:{{ s.fg }}" style-hover="background:var(--gray-200)">{{ s.label }}</a>
-                </sc-for>
-              </div>
-            </sc-if>
-          </sc-if>
-        </div>
-      </sc-for>
-    </aside>
-
-    <main style="flex:1;min-width:0;display:flex;flex-direction:column">
-      <section style="background:var(--rich-black);color:#fff;padding:{{ heroPad }}">
-        <div style="max-width:880px;display:flex;flex-direction:column;gap:14px">
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-            <span style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)">{{ page.eyebrow }}</span>
-            <sc-if value="{{ page.hasTag }}" hint-placeholder-val="{{ false }}">
-              <span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:999px;background:{{ page.tagBg }};color:{{ page.tagFg }}">{{ page.tag }}</span>
-            </sc-if>
-          </div>
-          <h1 style="color:#fff;font-size:{{ h1Size }};font-weight:800;line-height:1.08">{{ page.title }}</h1>
-          <sc-if value="{{ page.hasSub }}" hint-placeholder-val="{{ false }}">
-            <p style="font-size:18px;line-height:1.55;color:#E6E6E6;max-width:68ch">{{ page.sub }}</p>
-          </sc-if>
-          <sc-if value="{{ page.hasTabs }}" hint-placeholder-val="{{ false }}">
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-              <sc-for list="{{ page.tabs }}" as="t" hint-placeholder-count="3">
-                <a href="{{ t.href }}" style="padding:10px 20px;border-radius:999px;font-size:15px;font-weight:700;text-decoration:none;border:2px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }}" style-hover="border-color:var(--orange)">{{ t.label }}</a>
-              </sc-for>
-            </div>
-          </sc-if>
-        </div>
-      </section>
-
-      <section style="padding:{{ bodyPad }};display:flex;flex-direction:column;gap:18px;max-width:960px;width:100%">
-        <sc-if value="{{ page.showCanvasBar }}" hint-placeholder-val="{{ false }}">
-          <a href="{{ page.canvasHref }}" style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-radius:20px;background:var(--orange-100);color:var(--rich-black);text-decoration:none;font-size:15px;font-weight:600;line-height:1.45" style-hover="background:var(--orange-100);text-decoration:underline">
-            <span style="flex:none;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:999px;background:var(--orange);color:var(--rich-black)">Canvas</span>
-            <span>Tus respuestas de esta actividad se suben a Canvas. Ver cómo entregar.</span>
+          <a href="#home" style="display:flex;flex-direction:column;line-height:1.15;text-decoration:none;min-width:0">
+            <span
+              style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)">Universidad
+              Anáhuac Mayab</span>
+            <span
+              style="font-size:16px;font-weight:800;color:var(--rich-black);letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Módulo
+              5 · Casos Kinetix</span>
           </a>
-        </sc-if>
+        </div>
+        <x-import component-from-global-scope="AnHuacMayabEducarParaTransformar_44f5d9.Button" href="#canvas" size="sm"
+          hint-size="auto,40px">Entregas en Canvas</x-import>
+      </header>
 
-        <sc-for list="{{ blocks }}" as="b" hint-placeholder-count="6">
-          <div style="display:flex;flex-direction:column;gap:12px">
-            <sc-if value="{{ b.isH }}" hint-placeholder-val="{{ false }}">
-              <h2 style="font-size:28px;margin-top:22px;padding-top:22px;border-top:1px solid var(--border-subtle)">{{ b.x }}</h2>
-            </sc-if>
-            <sc-if value="{{ b.isH4 }}" hint-placeholder-val="{{ false }}">
-              <h4 style="font-size:19px;margin-top:8px">{{ b.x }}</h4>
-            </sc-if>
-            <sc-if value="{{ b.isP }}" hint-placeholder-val="{{ true }}">
-              <p style="font-size:17px;line-height:1.7;max-width:72ch;color:var(--raisin-black)">{{ b.x }}</p>
-            </sc-if>
-            <sc-if value="{{ b.isList }}" hint-placeholder-val="{{ false }}">
-              <div style="display:flex;flex-direction:column;gap:10px;max-width:72ch">
-                <sc-for list="{{ b.items }}" as="it" hint-placeholder-count="3">
-                  <div style="display:flex;gap:14px;align-items:flex-start">
-                    <span style="flex:none;min-width:28px;height:28px;margin-top:1px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;background:{{ b.mkBg }};color:var(--rich-black)">{{ it.mk }}</span>
-                    <div style="display:flex;flex-direction:column;gap:8px;font-size:17px;line-height:1.65;color:var(--raisin-black)">
-                      <span>{{ it.v }}</span>
-                      <sc-for list="{{ it.subs }}" as="s" hint-placeholder-count="0">
-                        <span style="display:flex;gap:10px;font-size:16px;line-height:1.55;color:var(--gray-600)"><span style="flex:none;color:var(--orange);font-weight:800">–</span><span>{{ s.v }}</span></span>
-                      </sc-for>
-                    </div>
-                  </div>
-                </sc-for>
-              </div>
-            </sc-if>
-            <sc-if value="{{ b.isTable }}" hint-placeholder-val="{{ false }}">
-              <div style="border:1px solid var(--border-subtle);border-radius:20px;overflow-x:auto;background:#fff">
-                <div style="min-width:{{ b.minW }}">
-                  <div style="display:grid;grid-template-columns:{{ b.cols }};background:var(--gray-100)">
-                    <sc-for list="{{ b.head }}" as="c" hint-placeholder-count="3">
-                      <div style="padding:12px 16px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-600)">{{ c.v }}</div>
+      <div style="display:flex;flex:1;align-items:flex-start">
+        <aside
+          style="position:{{ sbPos }};top:{{ sbTop }};left:0;bottom:0;z-index:20;display:{{ sbDisplay }};flex-direction:column;gap:4px;width:300px;flex:none;height:{{ sbHeight }};overflow-y:auto;background:var(--gray-100);padding:24px 16px 48px;box-shadow:{{ sbShadow }}">
+          <sc-for list="{{ nav }}" as="e" hint-placeholder-count="8">
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <sc-if value="{{ e.isLabel }}" hint-placeholder-val="{{ false }}">
+                <div
+                  style="margin:20px 12px 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-600)">
+                  {{ e.label }}</div>
+              </sc-if>
+              <sc-if value="{{ e.isLink }}" hint-placeholder-val="{{ true }}">
+                <a href="{{ e.href }}"
+                  style="display:block;padding:10px 12px;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none;background:{{ e.bg }};color:{{ e.fg }}"
+                  style-hover="background:var(--gray-200)">{{ e.label }}</a>
+              </sc-if>
+              <sc-if value="{{ e.isCase }}" hint-placeholder-val="{{ false }}">
+                <a href="{{ e.href }}"
+                  style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;text-decoration:none;background:{{ e.bg }};color:{{ e.fg }}"
+                  style-hover="background:var(--gray-200)">
+                  <span
+                    style="flex:none;width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;background:{{ e.chipBg }};color:{{ e.chipFg }}">{{
+                    e.n }}</span>
+                  <span style="display:flex;flex-direction:column;line-height:1.25;min-width:0">
+                    <span style="font-size:15px;font-weight:700">{{ e.title }}</span>
+                    <span style="font-size:12px;font-weight:600;color:var(--gray-600)">{{ e.tag }}</span>
+                  </span>
+                </a>
+                <sc-if value="{{ e.open }}" hint-placeholder-val="{{ false }}">
+                  <div
+                    style="display:flex;flex-direction:column;gap:2px;margin:2px 0 8px 27px;padding-left:14px;border-left:2px solid var(--orange)">
+                    <sc-for list="{{ e.subs }}" as="s" hint-placeholder-count="3">
+                      <a href="{{ s.href }}"
+                        style="display:block;padding:8px 12px;border-radius:10px;font-size:14px;font-weight:{{ s.fw }};text-decoration:none;background:{{ s.bg }};color:{{ s.fg }}"
+                        style-hover="background:var(--gray-200)">{{ s.label }}</a>
                     </sc-for>
                   </div>
-                  <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="3">
-                    <div style="display:grid;grid-template-columns:{{ b.cols }};border-top:1px solid var(--border-subtle)">
-                      <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="3">
-                        <div style="padding:12px 16px;font-size:15px;line-height:1.5;color:var(--raisin-black);font-weight:{{ c.fw }}">{{ c.v }}</div>
+                </sc-if>
+              </sc-if>
+            </div>
+          </sc-for>
+        </aside>
+
+        <main style="flex:1;min-width:0;display:flex;flex-direction:column">
+          <section style="background:var(--rich-black);color:#fff;padding:{{ heroPad }}">
+            <div style="max-width:880px;display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                <span
+                  style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)">{{
+                  page.eyebrow }}</span>
+                <sc-if value="{{ page.hasTag }}" hint-placeholder-val="{{ false }}">
+                  <span
+                    style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:999px;background:{{ page.tagBg }};color:{{ page.tagFg }}">{{
+                    page.tag }}</span>
+                </sc-if>
+              </div>
+              <h1 style="color:#fff;font-size:{{ h1Size }};font-weight:800;line-height:1.08">{{ page.title }}</h1>
+              <sc-if value="{{ page.hasSub }}" hint-placeholder-val="{{ false }}">
+                <p style="font-size:18px;line-height:1.55;color:#E6E6E6;max-width:68ch">{{ page.sub }}</p>
+              </sc-if>
+              <sc-if value="{{ page.hasTabs }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+                  <sc-for list="{{ page.tabs }}" as="t" hint-placeholder-count="3">
+                    <a href="{{ t.href }}"
+                      style="padding:10px 20px;border-radius:999px;font-size:15px;font-weight:700;text-decoration:none;border:2px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }}"
+                      style-hover="border-color:var(--orange)">{{ t.label }}</a>
+                  </sc-for>
+                  <sc-if value="{{ page.hasAppBtn }}" hint-placeholder-val="{{ false }}">
+                    <a href="{{ page.appHref }}" target="_blank" rel="noopener noreferrer"
+                      style="padding:10px 20px;border-radius:999px;font-size:15px;font-weight:700;text-decoration:none;border:2px solid #fff;background:#fff;color:var(--rich-black)"
+                      style-hover="border-color:var(--orange);background:var(--orange-100)">App Arbol Decision</a>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </div>
+          </section>
+
+          <section style="padding:{{ bodyPad }};display:flex;flex-direction:column;gap:18px;max-width:960px;width:100%">
+            <sc-if value="{{ page.showCanvasBar }}" hint-placeholder-val="{{ false }}">
+              <a href="{{ page.canvasHref }}"
+                style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-radius:20px;background:var(--orange-100);color:var(--rich-black);text-decoration:none;font-size:15px;font-weight:600;line-height:1.45"
+                style-hover="background:var(--orange-100);text-decoration:underline">
+                <span
+                  style="flex:none;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:999px;background:var(--orange);color:var(--rich-black)">Canvas</span>
+                <span>Tus respuestas de esta actividad se suben a Canvas. Ver cómo entregar.</span>
+              </a>
+            </sc-if>
+
+            <sc-for list="{{ blocks }}" as="b" hint-placeholder-count="6">
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <sc-if value="{{ b.isH }}" hint-placeholder-val="{{ false }}">
+                  <h2 style="font-size:28px;margin-top:22px;padding-top:22px;border-top:1px solid var(--border-subtle)">
+                    {{ b.x }}</h2>
+                </sc-if>
+                <sc-if value="{{ b.isH4 }}" hint-placeholder-val="{{ false }}">
+                  <h4 style="font-size:19px;margin-top:8px">{{ b.x }}</h4>
+                </sc-if>
+                <sc-if value="{{ b.isP }}" hint-placeholder-val="{{ true }}">
+                  <p style="font-size:17px;line-height:1.7;max-width:72ch;color:var(--raisin-black)">{{ b.x }}</p>
+                </sc-if>
+                <sc-if value="{{ b.isList }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:10px;max-width:72ch">
+                    <sc-for list="{{ b.items }}" as="it" hint-placeholder-count="3">
+                      <div style="display:flex;gap:14px;align-items:flex-start">
+                        <span
+                          style="flex:none;min-width:28px;height:28px;margin-top:1px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;background:{{ b.mkBg }};color:var(--rich-black)">{{
+                          it.mk }}</span>
+                        <div
+                          style="display:flex;flex-direction:column;gap:8px;font-size:17px;line-height:1.65;color:var(--raisin-black)">
+                          <span>{{ it.v }}</span>
+                          <sc-for list="{{ it.subs }}" as="s" hint-placeholder-count="0">
+                            <span
+                              style="display:flex;gap:10px;font-size:16px;line-height:1.55;color:var(--gray-600)"><span
+                                style="flex:none;color:var(--orange);font-weight:800">–</span><span>{{ s.v
+                                }}</span></span>
+                          </sc-for>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ b.isTable }}" hint-placeholder-val="{{ false }}">
+                  <div style="border:1px solid var(--border-subtle);border-radius:20px;overflow-x:auto;background:#fff">
+                    <div style="min-width:{{ b.minW }}">
+                      <div style="display:grid;grid-template-columns:{{ b.cols }};background:var(--gray-100)">
+                        <sc-for list="{{ b.head }}" as="c" hint-placeholder-count="3">
+                          <div
+                            style="padding:12px 16px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-600)">
+                            {{ c.v }}</div>
+                        </sc-for>
+                      </div>
+                      <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="3">
+                        <div
+                          style="display:grid;grid-template-columns:{{ b.cols }};border-top:1px solid var(--border-subtle)">
+                          <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="3">
+                            <div
+                              style="padding:12px 16px;font-size:15px;line-height:1.5;color:var(--raisin-black);font-weight:{{ c.fw }}">
+                              {{ c.v }}</div>
+                          </sc-for>
+                        </div>
                       </sc-for>
                     </div>
-                  </sc-for>
-                </div>
-              </div>
-            </sc-if>
-            <sc-if value="{{ b.isFacts }}" hint-placeholder-val="{{ false }}">
-              <div style="display:flex;flex-direction:column;border:1px solid var(--border-subtle);border-radius:20px;overflow:hidden">
-                <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="3">
-                  <div style="display:grid;grid-template-columns:minmax(110px,190px) 1fr;gap:16px;padding:14px 20px;border-top:{{ r.bt }}">
-                    <span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--orange-700);padding-top:3px">{{ r.k }}</span>
-                    <span style="font-size:16px;line-height:1.55;color:var(--raisin-black)">{{ r.v }}</span>
                   </div>
-                </sc-for>
-              </div>
-            </sc-if>
-            <sc-if value="{{ b.isCallout }}" hint-placeholder-val="{{ false }}">
-              <div style="padding:20px 24px;border-radius:20px;background:{{ b.bg }};color:{{ b.fg }};display:flex;flex-direction:column;gap:6px">
-                <span style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:{{ b.kfg }}">{{ b.title }}</span>
-                <span style="font-size:17px;line-height:1.6">{{ b.x }}</span>
-              </div>
-            </sc-if>
-            <sc-if value="{{ b.isCanvas }}" hint-placeholder-val="{{ false }}">
-              <div style="background:var(--rich-black);color:#fff;border-radius:28px;padding:32px;display:flex;flex-direction:column;gap:22px">
-                <div style="display:flex;flex-direction:column;gap:8px">
-                  <span style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)">Entrega en Canvas</span>
-                  <h3 style="color:#fff;font-size:26px">{{ b.title }}</h3>
-                  <p style="font-size:17px;line-height:1.6;color:#E6E6E6">{{ b.x }}</p>
-                </div>
-                <div style="display:flex;flex-direction:column;gap:10px">
-                  <span style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#CFCFCF">Qué debes subir</span>
-                  <sc-for list="{{ b.items }}" as="it" hint-placeholder-count="4">
-                    <div style="display:flex;gap:12px;font-size:16px;line-height:1.55"><span style="flex:none;color:var(--orange);font-weight:800">✓</span><span>{{ it.v }}</span></div>
-                  </sc-for>
-                </div>
-                <div style="padding-top:18px;border-top:1px solid #3a3a3a;font-size:15px;line-height:1.6;color:#E6E6E6">{{ b.note }}</div>
-              </div>
-            </sc-if>
-            <sc-if value="{{ b.isCheck }}" hint-placeholder-val="{{ false }}">
-              <div style="border:1px solid var(--border-subtle);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:6px">
-                <span style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-700);margin-bottom:6px">Antes de enviar a Canvas</span>
-                <sc-for list="{{ b.items }}" as="it" hint-placeholder-count="4">
-                  <button onClick="{{ it.toggle }}" style="display:flex;gap:14px;align-items:flex-start;text-align:left;padding:10px 8px;border:0;border-radius:12px;background:transparent;cursor:pointer;font-family:inherit;font-size:16px;line-height:1.5;color:var(--raisin-black)" style-hover="background:var(--gray-100)">
-                    <span style="flex:none;width:24px;height:24px;margin-top:1px;border-radius:7px;border:2px solid var(--orange);background:{{ it.bg }};color:var(--rich-black);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800">{{ it.mark }}</span>
-                    <span>{{ it.v }}</span>
-                  </button>
-                </sc-for>
-              </div>
-            </sc-if>
-            <sc-if value="{{ b.isCards }}" hint-placeholder-val="{{ false }}">
-              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px;margin-top:6px">
-                <sc-for list="{{ b.items }}" as="c" hint-placeholder-count="5">
-                  <a href="{{ c.href }}" style="display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:20px;background:{{ c.bg }};color:{{ c.fg }};text-decoration:none;box-shadow:var(--shadow-sm)" style-hover="box-shadow:var(--shadow-md);text-decoration:none">
-                    <div style="display:flex;justify-content:space-between;align-items:center">
-                      <span style="font-size:36px;font-weight:800;letter-spacing:-.02em;color:{{ c.nfg }}">{{ c.n }}</span>
-                      <span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:{{ c.tagBg }};color:{{ c.tagFg }}">{{ c.tag }}</span>
+                </sc-if>
+                <sc-if value="{{ b.isFacts }}" hint-placeholder-val="{{ false }}">
+                  <div
+                    style="display:flex;flex-direction:column;border:1px solid var(--border-subtle);border-radius:20px;overflow:hidden">
+                    <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="3">
+                      <div
+                        style="display:grid;grid-template-columns:minmax(110px,190px) 1fr;gap:16px;padding:14px 20px;border-top:{{ r.bt }}">
+                        <span
+                          style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--orange-700);padding-top:3px">{{
+                          r.k }}</span>
+                        <span style="font-size:16px;line-height:1.55;color:var(--raisin-black)">{{ r.v }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ b.isCallout }}" hint-placeholder-val="{{ false }}">
+                  <div
+                    style="padding:20px 24px;border-radius:20px;background:{{ b.bg }};color:{{ b.fg }};display:flex;flex-direction:column;gap:6px">
+                    <span
+                      style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:{{ b.kfg }}">{{
+                      b.title }}</span>
+                    <span style="font-size:17px;line-height:1.6">{{ b.x }}</span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ b.isCanvas }}" hint-placeholder-val="{{ false }}">
+                  <div
+                    style="background:var(--rich-black);color:#fff;border-radius:28px;padding:32px;display:flex;flex-direction:column;gap:22px">
+                    <div style="display:flex;flex-direction:column;gap:8px">
+                      <span
+                        style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)">Entrega
+                        en Canvas</span>
+                      <h3 style="color:#fff;font-size:26px">{{ b.title }}</h3>
+                      <p style="font-size:17px;line-height:1.6;color:#E6E6E6">{{ b.x }}</p>
                     </div>
-                    <span style="font-size:20px;font-weight:800;line-height:1.2;letter-spacing:-.02em">{{ c.title }}</span>
-                    <span style="font-size:14px;line-height:1.5;color:{{ c.sfg }}">{{ c.sub }}</span>
-                    <span style="font-size:14px;font-weight:700;color:{{ c.nfg }}">Abrir caso →</span>
-                  </a>
-                </sc-for>
+                    <div style="display:flex;flex-direction:column;gap:10px">
+                      <span
+                        style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#CFCFCF">Qué
+                        debes subir</span>
+                      <sc-for list="{{ b.items }}" as="it" hint-placeholder-count="4">
+                        <div style="display:flex;gap:12px;font-size:16px;line-height:1.55"><span
+                            style="flex:none;color:var(--orange);font-weight:800">✓</span><span>{{ it.v }}</span></div>
+                      </sc-for>
+                    </div>
+                    <div
+                      style="padding-top:18px;border-top:1px solid #3a3a3a;font-size:15px;line-height:1.6;color:#E6E6E6">
+                      {{ b.note }}</div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ b.isCheck }}" hint-placeholder-val="{{ false }}">
+                  <div
+                    style="border:1px solid var(--border-subtle);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:6px">
+                    <span
+                      style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-700);margin-bottom:6px">Antes
+                      de enviar a Canvas</span>
+                    <sc-for list="{{ b.items }}" as="it" hint-placeholder-count="4">
+                      <button onClick="{{ it.toggle }}"
+                        style="display:flex;gap:14px;align-items:flex-start;text-align:left;padding:10px 8px;border:0;border-radius:12px;background:transparent;cursor:pointer;font-family:inherit;font-size:16px;line-height:1.5;color:var(--raisin-black)"
+                        style-hover="background:var(--gray-100)">
+                        <span
+                          style="flex:none;width:24px;height:24px;margin-top:1px;border-radius:7px;border:2px solid var(--orange);background:{{ it.bg }};color:var(--rich-black);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800">{{
+                          it.mark }}</span>
+                        <span>{{ it.v }}</span>
+                      </button>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ b.isCards }}" hint-placeholder-val="{{ false }}">
+                  <div
+                    style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px;margin-top:6px">
+                    <sc-for list="{{ b.items }}" as="c" hint-placeholder-count="5">
+                      <a href="{{ c.href }}"
+                        style="display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:20px;background:{{ c.bg }};color:{{ c.fg }};text-decoration:none;box-shadow:var(--shadow-sm)"
+                        style-hover="box-shadow:var(--shadow-md);text-decoration:none">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                          <span style="font-size:36px;font-weight:800;letter-spacing:-.02em;color:{{ c.nfg }}">{{ c.n
+                            }}</span>
+                          <span
+                            style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:{{ c.tagBg }};color:{{ c.tagFg }}">{{
+                            c.tag }}</span>
+                        </div>
+                        <span style="font-size:20px;font-weight:800;line-height:1.2;letter-spacing:-.02em">{{ c.title
+                          }}</span>
+                        <span style="font-size:14px;line-height:1.5;color:{{ c.sfg }}">{{ c.sub }}</span>
+                        <span style="font-size:14px;font-weight:700;color:{{ c.nfg }}">Abrir caso →</span>
+                      </a>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ b.isAction }}" hint-placeholder-val="{{ false }}">
+                  <div
+                    style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px 24px;border-radius:20px;background:var(--gray-100);border:1px solid var(--border-subtle)">
+                    <div style="display:flex;flex-direction:column;gap:4px;min-width:220px;flex:1">
+                      <span
+                        style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-700)">{{
+                        b.kicker }}</span>
+                      <span style="font-size:16px;line-height:1.5;color:var(--raisin-black)">{{ b.x }}</span>
+                    </div>
+                    <a href="{{ b.href }}" target="_blank" rel="noopener noreferrer"
+                      style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;border-radius:999px;background:var(--orange);border:2px solid var(--orange);color:#fff;font-size:16px;font-weight:700;text-decoration:none;white-space:nowrap"
+                      style-hover="background:var(--orange-700);border-color:var(--orange-700);text-decoration:none">{{
+                      b.label }}</a>
+                  </div>
+                </sc-if>
               </div>
-            </sc-if>
-            <sc-if value="{{ b.isAction }}" hint-placeholder-val="{{ false }}">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px 24px;border-radius:20px;background:var(--gray-100);border:1px solid var(--border-subtle)">
-                <div style="display:flex;flex-direction:column;gap:4px;min-width:220px;flex:1">
-                  <span style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-700)">{{ b.kicker }}</span>
-                  <span style="font-size:16px;line-height:1.5;color:var(--raisin-black)">{{ b.x }}</span>
-                </div>
-                <a href="{{ b.href }}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;border-radius:999px;background:var(--orange);border:2px solid var(--orange);color:#fff;font-size:16px;font-weight:700;text-decoration:none;white-space:nowrap" style-hover="background:var(--orange-700);border-color:var(--orange-700);text-decoration:none">{{ b.label }}</a>
-              </div>
-            </sc-if>
-          </div>
-        </sc-for>
+            </sc-for>
 
-        <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px;padding-top:28px;border-top:1px solid var(--border-subtle)">
-          <sc-if value="{{ hasPrev }}" hint-placeholder-val="{{ false }}">
-            <a href="{{ prev.href }}" style="display:flex;flex-direction:column;gap:2px;padding:14px 22px;border-radius:20px;background:var(--gray-100);text-decoration:none;max-width:46%" style-hover="background:var(--gray-200);text-decoration:none">
-              <span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-600)">← Anterior</span>
-              <span style="font-size:15px;font-weight:700;color:var(--rich-black)">{{ prev.label }}</span>
-            </a>
-          </sc-if>
-          <sc-if value="{{ hasNext }}" hint-placeholder-val="{{ false }}">
-            <a href="{{ next.href }}" style="display:flex;flex-direction:column;gap:2px;padding:14px 22px;border-radius:20px;background:var(--orange-100);text-decoration:none;text-align:right;margin-left:auto;max-width:46%" style-hover="text-decoration:none;background:#FFD9C4">
-              <span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--orange-700)">Siguiente →</span>
-              <span style="font-size:15px;font-weight:700;color:var(--rich-black)">{{ next.label }}</span>
-            </a>
-          </sc-if>
+            <div
+              style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px;padding-top:28px;border-top:1px solid var(--border-subtle)">
+              <sc-if value="{{ hasPrev }}" hint-placeholder-val="{{ false }}">
+                <a href="{{ prev.href }}"
+                  style="display:flex;flex-direction:column;gap:2px;padding:14px 22px;border-radius:20px;background:var(--gray-100);text-decoration:none;max-width:46%"
+                  style-hover="background:var(--gray-200);text-decoration:none">
+                  <span
+                    style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-600)">←
+                    Anterior</span>
+                  <span style="font-size:15px;font-weight:700;color:var(--rich-black)">{{ prev.label }}</span>
+                </a>
+              </sc-if>
+              <sc-if value="{{ hasNext }}" hint-placeholder-val="{{ false }}">
+                <a href="{{ next.href }}"
+                  style="display:flex;flex-direction:column;gap:2px;padding:14px 22px;border-radius:20px;background:var(--orange-100);text-decoration:none;text-align:right;margin-left:auto;max-width:46%"
+                  style-hover="text-decoration:none;background:#FFD9C4">
+                  <span
+                    style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--orange-700)">Siguiente
+                    →</span>
+                  <span style="font-size:15px;font-weight:700;color:var(--rich-black)">{{ next.label }}</span>
+                </a>
+              </sc-if>
+            </div>
+          </section>
+
+          <footer
+            style="margin-top:auto;background:var(--raisin-black);color:#CFCFCF;padding:28px 40px;font-size:14px;line-height:1.6">
+            Universidad Anáhuac Mayab · Módulo 5: Comunicación y Gestión de la Información con IA · Certificación en
+            Desarrollo de Competencias Gerenciales. Caso completamente ficticio con fines didácticos.
+          </footer>
+        </main>
+      </div>
+      <sc-if value="{{ overlay }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ toggleMenu }}" style="position:fixed;inset:64px 0 0 0;z-index:10;background:rgba(4,4,4,.45)">
         </div>
-      </section>
+      </sc-if>
+    </div>
 
-      <footer style="margin-top:auto;background:var(--raisin-black);color:#CFCFCF;padding:28px 40px;font-size:14px;line-height:1.6">
-        Universidad Anáhuac Mayab · Módulo 5: Comunicación y Gestión de la Información con IA · Certificación en Desarrollo de Competencias Gerenciales. Caso completamente ficticio con fines didácticos.
-      </footer>
-    </main>
-  </div>
-  <sc-if value="{{ overlay }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ toggleMenu }}" style="position:fixed;inset:64px 0 0 0;z-index:10;background:rgba(4,4,4,.45)"></div>
-  </sc-if>
-</div>
-
-</x-dc>
-<script type="text/x-dc" data-dc-script>
+  </x-dc>
+  <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = { route: 'home', narrow: false, menu: false, checks: {} };
 
@@ -506,7 +615,6 @@ class Component extends DCLogic {
       const base = { eyebrow: eb, tag: c.tag, tagIa: c.ia, title: c.title, sub: c.sub, caseN: c.n };
       pages['c' + c.n + '-narrativa'] = { ...base, blocks: c.narr };
       pages['c' + c.n + '-actividad'] = { ...base, showCanvasBar: true, blocks: [
-        ...(c.n === 3 ? [{ t: 'action', kicker: 'Herramienta interactiva', x: 'Construye y prueba tus árboles de decisión conversacionales para los escenarios de Fair Play Digital.', label: 'App Arbol Decision', href: 'https://alejandrokantun81.github.io/fair-play-digital-arbol-decision/' }] : []),
         CO('obj', 'Objetivo de aprendizaje', c.obj),
         c.ia ? CO('ia', 'Uso de IA', c.final ? 'Esta actividad incorpora IA Integrada (Generativa + Analítica + Diseño) como herramienta central. Es el entregable final del Módulo 5.' : c.n === 3 ? 'Esta actividad incorpora el uso de herramientas de IA Generativa como parte central del proceso.' : 'Esta actividad incorpora el uso de herramientas de IA Analítica y de Visualización de Datos.') : CO('noia', 'Sin IA', 'Esta actividad se realiza completamente SIN el uso de herramientas de Inteligencia Artificial.'),
         H(c.final ? 'Estructura del documento ejecutivo' : 'Lo que debes hacer'),
@@ -578,7 +686,7 @@ class Component extends DCLogic {
       return o;
     });
     // canvas callout page-header tag styles
-    const page = { ...pg, hasSub: !!pg.sub, hasTag: !!pg.tag, tagBg: pg.tagIa ? ORANGE : '#fff', tagFg: BLK, hasTabs: !!m, tabs, showCanvasBar: !!pg.showCanvasBar, canvasHref: '#c' + curCase + '-evaluacion' };
+    const page = { ...pg, hasSub: !!pg.sub, hasTag: !!pg.tag, tagBg: pg.tagIa ? ORANGE : '#fff', tagFg: BLK, hasTabs: !!m, tabs, hasAppBtn: curCase === 3 && curSec === 'actividad', appHref: 'https://alejandrokantun81.github.io/fair-play-digital-arbol-decision/', showCanvasBar: !!pg.showCanvasBar, canvasHref: '#c' + curCase + '-evaluacion' };
 
     const idx = order.indexOf(key);
     const lab = k => { const p = pages[k]; if (!p) return ''; return p.caseN ? 'Caso ' + p.caseN + ' · ' + p.secLabel : p.title; };
@@ -598,4 +706,5 @@ class Component extends DCLogic {
 }
 </script>
 </body>
+
 </html>
